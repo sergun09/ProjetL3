@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reservation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select multiple="true" cancelText="Cancel" okText="Confirmer">
+        <ion-select-option value="type1">type1</ion-select-option>
+        <ion-select-option value="type2">type2</ion-select-option>
+        <ion-select-option value="type3">type3</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Intitulé</ion-label>
+      <ion-select multiple="true" cancelText="Cancel" okText="Confirmer">
+        <ion-select-option value="type1">type1</ion-select-option>
+        <ion-select-option value="type2">type2</ion-select-option>
+        <ion-select-option value="type3">type3</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Etat</ion-label>
+      <ion-select multiple="true" cancelText="Cancel" okText="Confirmer">
+        <ion-select-option value="type1">type1</ion-select-option>
+        <ion-select-option value="type2">type2</ion-select-option>
+        <ion-select-option value="type3">type3</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Emprunt</ion-label>
+      <ion-select multiple="true" cancelText="Cancel" okText="Confirmer" [value]="['type1', 'type2']">
+        <ion-select-option value="type1">type1</ion-select-option>
+        <ion-select-option value="type2">type2</ion-select-option>
+        <ion-select-option value="type3">type3</ion-select-option>
+        <ion-select-option value="type4">type4</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+  <ion-button class="ion-marging-top" expand="block" routerLink=""><ion-icon  slot="start" name="search-outline"></ion-icon>Lancer la Recherche</ion-button>
+</ion-content>
