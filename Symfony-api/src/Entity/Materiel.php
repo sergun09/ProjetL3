@@ -45,13 +45,15 @@ class Materiel
     private $enMaintenance;
 
     #[ORM\ManyToOne(targetEntity: TypeMateriel::class, inversedBy: 'materiels')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $typeMateriel;
 
     #[ORM\OneToMany(mappedBy: 'materiel', targetEntity: Emprunt::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private $emprunts;
 
     #[ORM\OneToMany(mappedBy: 'materiel', targetEntity: Reparation::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private $reparation;
 
     public function __construct()

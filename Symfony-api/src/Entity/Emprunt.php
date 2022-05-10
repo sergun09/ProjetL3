@@ -25,11 +25,11 @@ class Emprunt
     private $motif;
 
     #[ORM\ManyToOne(targetEntity: Materiel::class, inversedBy: 'emprunts')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $materiel;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'emprunts')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $adherent;
 
     public function getId(): ?int

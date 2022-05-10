@@ -21,6 +21,7 @@ class TypeMateriel
     private $nom;
 
     #[ORM\OneToMany(mappedBy: 'typeMateriel', targetEntity: Materiel::class)]
+    #[ORM\JoinColumn(nullable: true)]
     private $materiels;
 
     public function __construct()

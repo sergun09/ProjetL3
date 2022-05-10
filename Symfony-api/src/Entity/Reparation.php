@@ -22,7 +22,7 @@ class Reparation
     private $description;
 
     #[ORM\ManyToOne(targetEntity: Materiel::class, inversedBy: 'reparation')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $materiel;
 
     public function getId(): ?int
