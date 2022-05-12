@@ -8,25 +8,31 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-        <strong>Saisir Nom</strong>
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">Nom à Saisir</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-button class="ion-marging-top" expand="block" routerLink="">Enregistrer et générer la clef</ion-button>
-    </ion-card-content>
-  </ion-card>
+  <form method="post">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <strong>Saisir Nom</strong>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Nom à Saisir</ion-label>
+          <ion-input #nom name="nom" type="text"></ion-input>
+        </ion-item>
+        <ion-button class="ion-marging-top" expand="block" (click)="create(nom.value.toString())">Enregistrer et générer
+          la clef
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </form>
+
   <ion-card>
     <ion-card-content>
       <ion-item>
         <ion-label position="floating">Clef Générer</ion-label>
-        <ion-input></ion-input>
+        <!--clef générée(voir dans la console) mais n'apparait pas à cause du Docker qui ne refraichit pas la page-->
+        <ion-input value="{{ user.uuid.toString()}}"></ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>

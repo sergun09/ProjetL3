@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220422171414 extends AbstractMigration
+final class Version20220511155944 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,13 +20,17 @@ final class Version20220422171414 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-
-        $this->addSql('CREATE TABLE emprunt (id INT NOT NULL, materiel_id INT NOT NULL, adherent_id INT NOT NULL, datedebut TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, datefin TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, motif VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE SEQUENCE emprunt_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE materiel_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE reparation_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE type_materiel_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE TABLE emprunt (id INT NOT NULL, materiel_id INT DEFAULT NULL, adherent_id INT DEFAULT NULL, datedebut TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, datefin TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, motif VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_364071D716880AAF ON emprunt (materiel_id)');
         $this->addSql('CREATE INDEX IDX_364071D725F06C53 ON emprunt (adherent_id)');
-        $this->addSql('CREATE TABLE materiel (id INT NOT NULL, type_materiel_id INT NOT NULL, intitule VARCHAR(255) NOT NULL, description VARCHAR(255) DEFAULT NULL, kit VARCHAR(255) NOT NULL, conditionnement VARCHAR(255) NOT NULL, etat VARCHAR(255) NOT NULL, emprunt VARCHAR(255) NOT NULL, montant_caution INT DEFAULT NULL, commentaire VARCHAR(255) DEFAULT NULL, en_maintenance BOOLEAN NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE materiel (id INT NOT NULL, type_materiel_id INT DEFAULT NULL, intitule VARCHAR(255) NOT NULL, description VARCHAR(255) DEFAULT NULL, kit VARCHAR(255) NOT NULL, conditionnement VARCHAR(255) NOT NULL, etat VARCHAR(255) NOT NULL, emprunt VARCHAR(255) NOT NULL, montant_caution INT DEFAULT NULL, commentaire VARCHAR(255) DEFAULT NULL, en_maintenance BOOLEAN NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_18D2B0915D91DD3E ON materiel (type_materiel_id)');
-        $this->addSql('CREATE TABLE reparation (id INT NOT NULL, materiel_id INT NOT NULL, nom VARCHAR(255) NOT NULL, description TEXT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE reparation (id INT NOT NULL, materiel_id INT DEFAULT NULL, nom VARCHAR(255) NOT NULL, description TEXT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_8FDF219D16880AAF ON reparation (materiel_id)');
         $this->addSql('CREATE TABLE type_materiel (id INT NOT NULL, nom VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE "user" (id INT NOT NULL, uuid VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, nom VARCHAR(255) NOT NULL, PRIMARY KEY(id))');

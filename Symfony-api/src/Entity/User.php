@@ -10,32 +10,39 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['read']], denormalizationContext: ['groups' => ['write']])]
 #[UniqueEntity(fields: ['uuid'], message: 'There is already an account with this uuid')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(['read', 'write'])]
     private $uuid;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(['read'])]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
+    #[Groups(['read', 'write'])]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read', 'write'])]
     private $nom;
 
     #[ORM\OneToMany(mappedBy: 'adherent', targetEntity: Emprunt::class)]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(['read'])]
     private $emprunts;
 
     public function __construct()

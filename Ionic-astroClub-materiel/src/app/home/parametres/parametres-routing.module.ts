@@ -10,15 +10,15 @@ const routes: Routes = [
   },
   {
     path: 'identite',
-    loadChildren: () => import('./identite/identite.module').then( m => m.IdentitePageModule)
+    loadChildren: () => import('./identite/identite.module').then(m => m.IdentitePageModule)
   },
   {
     path: 'adherents',
-    loadChildren: () => import('./adherents/adherents.module').then( m => m.AdherentsPageModule)
+    loadChildren: () => import('./adherents/adherents.module').then(m => m.AdherentsPageModule)
   },
   {
     path: 'gestion-parc',
-    loadChildren: () => import('./gestion-parc/gestion-parc.module').then( m => m.GestionParcPageModule)
+    loadChildren: () => import('./gestion-parc/gestion-parc.module').then(m => m.GestionParcPageModule)
   }
 ];
 
@@ -26,4 +26,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ParametresPageRoutingModule {}
+export class ParametresPageRoutingModule { }
