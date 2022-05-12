@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingController, NavController } from '@ionic/angular';
 import { UserPost } from 'src/entity/UserPost';
 import { AdherentsService } from 'src/services/adherents.service';
 import { v4 as uuidv4 } from 'uuid';
@@ -16,7 +17,7 @@ export class NouvelAdherentPage implements OnInit {
       password: "",
       nom: ""
     }
-  constructor(public adherentService: AdherentsService) { }
+  constructor(private adherentService: AdherentsService, private loadingCrtl: LoadingController , private navCrtl: NavController) { }
 
   ngOnInit() {
   }
@@ -27,8 +28,13 @@ export class NouvelAdherentPage implements OnInit {
       this.user.nom = nom;
       this.user.uuid = uuid.toString();
       this.user.password = uuid.toString();
-      console.log(this.user);
-      this.adherentService.createUser(this.user)
+      this.loadingCrtl.create({keyboardClose : true , message : 'Veuillez patienter...'}).then(loadingEl => {
+        loadingEl.present();
+        this.adherentService.createUser(this.user).subscribe(()=>{
+          loadingEl.dismiss();
+          this.navCrtl.navigateBack('/home/parametres/adherents');
+        });
+      });
     }
   }
 }

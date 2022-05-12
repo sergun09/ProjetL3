@@ -17,14 +17,25 @@
         <ion-card-header>
           <ion-card-title><strong>Les Adhérents :</strong></ion-card-title>
         </ion-card-header>
-        <ion-card-content>
+        <ion-card-content *ngIf="ready">
           <ion-list>
             <ion-item *ngFor="let adh of adherents">
               <ion-label>{{ adh.nom }}</ion-label>
               <ion-button routerLink="">Edit</ion-button>
-              <ion-button routerLink="">Supprimer</ion-button>
+              <ion-button (click)="deleteUser(adh.id)">Supprimer</ion-button>
             </ion-item>
           </ion-list>
+        </ion-card-content>
+        <ion-card-content *ngIf="!ready">
+          <ion-grid>
+            <ion-row>
+              <ion-col size-sm="2" offset-sm="5">
+                <h5 >Loading...</h5>
+                <ion-spinner color="primary"></ion-spinner>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
         </ion-card-content>
       </ion-card>
     </ion-card-content>

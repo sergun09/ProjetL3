@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActionSheetController } from '@ionic/angular';
 import { User } from 'src/entity/User';
 import { AdherentsService } from 'src/services/adherents.service';
 
@@ -10,15 +11,46 @@ import { AdherentsService } from 'src/services/adherents.service';
 export class AdherentsPage implements OnInit {
 
   adherents: Array<User> = new Array();
-  constructor(public adherentService: AdherentsService) { }
+  ready : boolean;
+  constructor(public adherentService: AdherentsService, private actionSheetCrtl: ActionSheetController ) { this.ready =false; }
 
   ngOnInit() {
-    this.adherentService.getAllUsers().subscribe((response) => this.adherents = response)
+    // this.adherentService.getAllUsers().subscribe((response) =>
+    // {
+    //   this.adherents = response;
+    //   this.ready = true;
+    // });
 
+  }
+  ionViewWillEnter(){
+    this.adherentService.getAllUsers().subscribe((response) =>
+    {
+      this.adherents = response;
+      this.ready = true;
+    });
   }
 
   deleteUser(idAdh: number) {
-    this.adherentService.deleteUserFromId(idAdh)
+    this.actionSheetCrtl.create({
+      header : ' Etes-vous sûr de vouloir le SUPPRIMER ?',
+      buttons: [
+        {
+          text : 'Yes',
+          handler : ()=>{
+             this.adherentService.deleteUserFromId(idAdh).subscribe(() =>{
+              this.adherents = this.adherents.filter((adherent) => adherent.id !== idAdh);
+            });
+          }
+        },
+        {
+          text : 'Cancel',
+          role : 'cancel'
+        }
+      ]
+    }).then(actionSheetEl=>{
+      actionSheetEl.present();
+    });
+
   }
 
 }
