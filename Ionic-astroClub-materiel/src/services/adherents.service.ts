@@ -12,7 +12,7 @@ export class AdherentsService {
 
   private server: string = "http://localhost:5000/api/users";
 
-  constructor(private http: HttpClient, ) { }
+  constructor(private http: HttpClient ) { }
 
   public getAllUsers(): Observable<Array<User>> {
     return this.http.get<User>(this.server,
