@@ -1,20 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Materiel } from '../materiel.model';
-import { MaterielsService } from '../materiels.service';
+import { Inventaire } from 'src/entity/Inventaire';
+import {InventairesService} from "../../../../services/inventaires.service";
 
 @Component({
-  selector: 'app-resultats-recherche',
+  selector: 'app-resultat-recherche',
   templateUrl: './resultats-recherche.page.html',
   styleUrls: ['./resultats-recherche.page.scss'],
 })
-export class ResultatsRecherchePage implements OnInit {
+export class InventairesPage implements OnInit {
 
-  materiels: Materiel[];
-
-  constructor( private matService: MaterielsService) { }
+  public inventaires: Array<Inventaire> = new Array();
+  constructor(public inventairesService: InventairesService) { }
 
   ngOnInit() {
-    this.materiels=this.matService._materiels;
+    this.inventairesService.getAllInventaires().subscribe((response) => {this.inventaires = response});
+
+  }
+
+  deleteInventaire(idInv: number) {
+    this.inventairesService.deleteInventaireFromId(idInv)
   }
 
 }
