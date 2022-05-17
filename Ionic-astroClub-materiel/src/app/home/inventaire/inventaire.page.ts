@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MaterielsService } from './materiels.service';
+import { InventairesService } from 'src/services/inventaires.service';
 
 @Component({
   selector: 'app-inventaire',
@@ -9,7 +9,7 @@ import { MaterielsService } from './materiels.service';
 })
 export class InventairePage implements OnInit {
 
-  constructor( private matService: MaterielsService) { }
+  constructor( private inventaireService: InventairesService) { }
 
   ngOnInit() {
   }

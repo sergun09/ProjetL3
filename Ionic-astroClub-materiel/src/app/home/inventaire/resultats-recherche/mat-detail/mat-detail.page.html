@@ -3,7 +3,10 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/inventaire/resultats-recherche"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{materiel.intitule}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" (click)="onDelete(inventaire.id)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>{{inventaire.intitule}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,32 +16,30 @@
       <ion-col size-md="6" offset-md="3">
         <ion-card>
           <ion-card-content>
-            <ion-list>
               <ion-item>
-                <ion-label>Type: {{ materiel.type}} </ion-label>
+                <ion-label>Type: {{ inventaire.typeMateriel?.nom}} </ion-label>
               </ion-item>
               <ion-item>
-                <ion-label>Description: {{ materiel.desc}} </ion-label>
+                <ion-label>Description: {{ inventaire.description}} </ion-label>
               </ion-item>
               <ion-item>
-                <ion-label>Conditionnement: {{ materiel.conditionnement}} </ion-label>
+                <ion-label>Conditionnement: {{ inventaire.conditionnement}} </ion-label>
               </ion-item>
               <ion-item>
-                <ion-label>Kit: {{ materiel.kit}} </ion-label>
+                <ion-label>Kit: {{ inventaire.kit}} </ion-label>
               </ion-item>
               <ion-item>
-                <ion-label>Etat: {{ materiel.etat}} </ion-label>
+                <ion-label>Etat: {{ inventaire.etat}} </ion-label>
               </ion-item>
               <ion-item>
-                <ion-label>Conditions d'Emprunt: {{ materiel.emprunt}} </ion-label>
+                <ion-label>Conditions d'Emprunt: {{ inventaire.emprunt}} </ion-label>
               </ion-item>
               <ion-item>
-                <ion-label>Montant de la caution: {{ materiel.montantCaution}} </ion-label>
+                <ion-label>Montant de la caution: {{ inventaire.montantCaution}} </ion-label>
               </ion-item>
               <ion-item>
-                <ion-label>Commantaire: {{ materiel.commantaire}} </ion-label>
+                <ion-label>Commantaire: {{ inventaire.commentaire}}</ion-label>
               </ion-item>
-            </ion-list>
           </ion-card-content>
         </ion-card>
   <ion-button class="ion-marging-top" expand="block" routerLink="">Signaler un disfonctionnement</ion-button>

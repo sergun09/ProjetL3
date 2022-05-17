@@ -7,6 +7,7 @@ use App\Repository\TypeMaterielRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TypeMaterielRepository::class)]
 #[ApiResource]
@@ -15,9 +16,11 @@ class TypeMateriel
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read:materiel"])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(["read:materiel"])]
     private $nom;
 
     #[ORM\OneToMany(mappedBy: 'typeMateriel', targetEntity: Materiel::class)]

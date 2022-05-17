@@ -1,6 +1,8 @@
+import { TypeMateriel } from "./TypeMateriel";
+
 export class Inventaire {
   id: number
-  type_materiel_id: number;
+  typeMateriel: TypeMateriel;
   intitule: string;
   description: string;
   kit: string;

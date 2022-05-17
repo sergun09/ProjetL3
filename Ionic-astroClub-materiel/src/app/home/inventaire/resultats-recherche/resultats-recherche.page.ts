@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 import { Inventaire } from 'src/entity/Inventaire';
 import {InventairesService} from "../../../../services/inventaires.service";
 
@@ -10,10 +11,22 @@ import {InventairesService} from "../../../../services/inventaires.service";
 export class InventairesPage implements OnInit {
 
   public inventaires: Array<Inventaire> = new Array();
-  constructor(public inventairesService: InventairesService) { }
+
+  constructor(public inventairesService: InventairesService, private loadingCrtl: LoadingController) {}
 
   ngOnInit() {
-    this.inventairesService.getAllInventaires().subscribe((response) => {this.inventaires = response});
+    //this.inventairesService.getAllInventaires().subscribe((response) => {this.inventaires = response});
+  }
+
+  ionViewWillEnter(){
+    this.loadingCrtl.create({keyboardClose : true, message : 'Veuillez patienter...'}).then(loadingEl =>{
+      loadingEl.present();
+      this.inventairesService.getAllInventaires().subscribe((response) => {
+      this.inventaires = response;
+      loadingEl.dismiss();
+    });
+
+    })
 
   }
 

@@ -7,45 +7,66 @@ use App\Repository\MaterielRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: MaterielRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read:collection']],
+    itemOperations: [
+        'put',
+        'delete',
+        'get' => [
+            'normalization_context' => ['groups'=> ['read:collection', 'read:item', 'read:materiel']]
+        ]
+    ]
+)]
 class Materiel
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read:collection'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $intitule;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['read:collection'])]
     private $description;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $kit;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $conditionnement;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $etat;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection'])]
     private $emprunt;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['read:collection'])]
     private $montantCaution;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['read:collection'])]
     private $commentaire;
 
     #[ORM\Column(type: 'boolean')]
+    #[Groups(['read:collection'])]
     private $enMaintenance;
 
     #[ORM\ManyToOne(targetEntity: TypeMateriel::class, inversedBy: 'materiels')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(["read:item"])]
     private $typeMateriel;
 
     #[ORM\OneToMany(mappedBy: 'materiel', targetEntity: Emprunt::class)]

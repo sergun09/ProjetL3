@@ -32,7 +32,7 @@ export class AdherentsPage implements OnInit {
 
   deleteUser(idAdh: number) {
     this.actionSheetCrtl.create({
-      header : ' Etes-vous sûr de vouloir le SUPPRIMER ?',
+      header : 'ETES-VOUS SUR DE VOULOIR LE SUPPRIMER ?',
       buttons: [
         {
           text : 'Yes',
