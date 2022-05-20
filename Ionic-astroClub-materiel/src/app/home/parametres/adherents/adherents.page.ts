@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, IonItemSliding, LoadingController } from '@ionic/angular';
 import { User } from 'src/entity/User';
 import { AdherentsService } from 'src/services/adherents.service';
 
@@ -12,7 +12,11 @@ export class AdherentsPage implements OnInit {
 
   adherents: Array<User> = new Array();
   ready: boolean;
-  constructor(public adherentService: AdherentsService, private actionSheetCrtl: ActionSheetController) { this.ready = false; }
+  constructor(public adherentService: AdherentsService,
+    private actionSheetCrtl: ActionSheetController,
+    private loadingCrtl: LoadingController) {
+    this.ready = false;
+  }
 
   ngOnInit() {
     // this.adherentService.getAllUsers().subscribe((response) =>
@@ -29,16 +33,21 @@ export class AdherentsPage implements OnInit {
     });
   }
 
-  deleteUser(idAdh: number) {
+  deleteUser(idAdh: number, slidingEl: IonItemSliding) {
     this.actionSheetCrtl.create({
       header: 'ETES-VOUS SUR DE VOULOIR LE SUPPRIMER ?',
       buttons: [
         {
           text: 'Yes',
           handler: () => {
-            this.adherentService.deleteUserFromId(idAdh).subscribe(() => {
-              this.adherents = this.adherents.filter((adherent) => adherent.id !== idAdh);
-            });
+            this.loadingCrtl.create({ keyboardClose: true, message: 'Veuillez patienter...' }).then(loadingEl => {
+              loadingEl.present();
+              this.adherentService.deleteUserFromId(idAdh).subscribe(() => {
+                this.adherents = this.adherents.filter((adherent) => adherent.id !== idAdh);
+                loadingEl.dismiss();
+                slidingEl.close();
+              })
+            })
           }
         },
         {

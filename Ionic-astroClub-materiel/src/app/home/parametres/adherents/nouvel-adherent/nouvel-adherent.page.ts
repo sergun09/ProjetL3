@@ -24,7 +24,7 @@ export class NouvelAdherentPage implements OnInit {
 
   create(nom: string): void {
     const uuid = uuidv4();
-    if (nom != null) {
+    if (nom !== null) {
       this.user.nom = nom;
       this.user.uuid = uuid.toString();
       this.user.password = uuid.toString();

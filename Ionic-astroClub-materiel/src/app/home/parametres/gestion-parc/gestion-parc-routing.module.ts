@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: GestionParcPage
+  },
+  {
+    path: 'new-materiel',
+    loadChildren: () => import('./new-materiel/new-materiel.module').then( m => m.NewMaterielPageModule)
   }
 ];
 

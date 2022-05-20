@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Inventaire } from 'src/entity/Inventaire';
 import { UserPost } from 'src/entity/UserPost';
+import { InventairePost } from 'src/entity/InventairePost';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class InventairesService {
       { observe: 'body', responseType: 'json' })
   }
 
-  public createInventaire(inventaire: Inventaire): Observable<boolean> {
+  public createInventaire(inventaire: InventairePost): Observable<boolean> {
     return this.http.post(this.server,
       inventaire,
       {

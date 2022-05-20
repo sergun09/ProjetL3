@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/parametres/gestion-parc"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ajout Materiel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Veuillez remplir les champs suivants:</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form #f="ngForm" (ngSubmit)="onSubmitMat(f)">
+              <ion-item>
+                <ion-label>Type</ion-label>
+                <ion-select cancelText="Cancel" okText="Confirmer" ngModel name="typeMateriel">
+                  <ion-select-option *ngFor="let typeMat of typeMateriels" [value]="typeMat.id">{{typeMat.nom}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Intitulé</ion-label>
+                <ion-input type="text" ngModel name="intitule"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Description</ion-label>
+                <ion-input type="text" ngModel name="description"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Kit</ion-label>
+                <ion-input type="text" ngModel name="kit"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Conditionnement</ion-label>
+                <ion-input type="text" ngModel name="conditionnement"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Etat</ion-label>
+                <ion-input type="text" ngModel name="etat"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Emprunt</ion-label>
+                <ion-input type="text" ngModel name="emprunt"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Montant de la Caution</ion-label>
+                <ion-input type="number" ngModel name="caution"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Commentaire</ion-label>
+                <ion-input type="text" ngModel name="commentaire"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>En Maintenance</ion-label>
+                <ion-select cancelText="Cancel" okText="Confirmer" ngModel name="enMaintenance">
+                  <ion-select-option value="0">Non</ion-select-option>
+                  <ion-select-option value="1">Oui</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-button type="submit" color="primary" expand="block">Valider</ion-button>
+              <ion-button type="reset" color="primary" expand="block">Réinitialiser</ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

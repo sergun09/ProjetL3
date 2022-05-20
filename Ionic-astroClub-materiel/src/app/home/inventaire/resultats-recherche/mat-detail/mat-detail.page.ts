@@ -17,8 +17,7 @@ export class MatDetailPage implements OnInit {
     private inventaireService: InventairesService,
     private loadingCrtl: LoadingController,
     private route: ActivatedRoute,
-    private navCtrl: NavController,
-    private actionSheetCtrl: ActionSheetController) { }
+    private navCtrl: NavController) { }
 
   ngOnInit() {
     // this.route.paramMap.subscribe(paramMap =>{
@@ -43,31 +42,5 @@ export class MatDetailPage implements OnInit {
       })
       })
     })
-  }
-
-  onDelete(id : number){
-    this.actionSheetCtrl.create({
-      header : 'ETES-VOUS SUR DE VOULOIR LE SUPPRIMER ?',
-      buttons: [
-        {
-          text: 'Yes',
-          handler: () => {
-            this.loadingCrtl.create({keyboardClose : true, message : 'Veuillez patienter...'}).then(loadingEl => {
-              loadingEl.present();
-              this.inventaireService.deleteInventaireFromId(id).subscribe(() => {
-                loadingEl.dismiss();
-              this.navCtrl.navigateBack('/home/inventaire/resultats-recherche');
-            })
-            })
-          }
-        },
-        {
-          text : 'Cancel',
-          role : 'cancel'
-        }
-      ]
-    }).then(actionSheetEl=>{
-      actionSheetEl.present();
-    });
   }
 }
