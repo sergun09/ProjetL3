@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\UserInfosController;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[ApiResource(normalizationContext: ['groups' => ['read']], denormalizationContext: ['groups' => ['write']])]
+#[ApiResource(collectionOperations: ['me' => ['pagination_enabled' => false, 'path' => '/me', 'method' => 'get', 'controller' => UserInfosController::class]], normalizationContext: ['groups' => ['read']], denormalizationContext: ['groups' => ['write']])]
 #[UniqueEntity(fields: ['uuid'], message: 'There is already an account with this uuid')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/login', name: 'app_login', methods: ['POST'])]
+    #[Route('/api/login', name: 'api_login', methods: ['POST'])]
     public function index(): JsonResponse
     {
         $user = $this->getUser();

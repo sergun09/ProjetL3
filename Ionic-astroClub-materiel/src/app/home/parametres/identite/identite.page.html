@@ -18,11 +18,14 @@
             </ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <ion-item class="ion-margin-bottom" >
-              <ion-label position="floating">Numéro de clef</ion-label>
-              <ion-input></ion-input>
-            </ion-item>
-            <ion-button  color="primary"  fill="clear" expand="block" >Valider</ion-button>
+            <form method="post">
+              <ion-item class="ion-margin-bottom">
+                <ion-label position="floating">Numéro de clef</ion-label>
+                <ion-input #uuid name="uuid"></ion-input>
+              </ion-item>
+              <ion-button color="primary" fill="clear" expand="block" (click)="login(uuid.value.toString())">Valider
+              </ion-button>
+            </form>
           </ion-card-content>
         </ion-card>
         <ion-card>
@@ -36,7 +39,7 @@
               <ion-label position="floating">Numéro de la clef de gestion</ion-label>
               <ion-input></ion-input>
             </ion-item>
-            <ion-button  color="primary"  fill="clear" expand="block" >Valider</ion-button>
+            <ion-button color="primary" fill="clear" expand="block">Valider</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>

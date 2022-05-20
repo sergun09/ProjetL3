@@ -17,7 +17,7 @@ export class NouvelAdherentPage implements OnInit {
       password: "",
       nom: ""
     }
-  constructor(private adherentService: AdherentsService, private loadingCrtl: LoadingController , private navCrtl: NavController) { }
+  constructor(private adherentService: AdherentsService, private loadingCrtl: LoadingController, private navCrtl: NavController) { }
 
   ngOnInit() {
   }
@@ -28,12 +28,13 @@ export class NouvelAdherentPage implements OnInit {
       this.user.nom = nom;
       this.user.uuid = uuid.toString();
       this.user.password = uuid.toString();
-      this.loadingCrtl.create({keyboardClose : true , message : 'Veuillez patienter...'}).then(loadingEl => {
+      this.loadingCrtl.create({ keyboardClose: true, message: 'Veuillez patienter...' }).then(loadingEl => {
         loadingEl.present();
-        this.adherentService.createUser(this.user).subscribe(()=>{
+        this.adherentService.createUser(this.user).subscribe(() => {
           loadingEl.dismiss();
           this.navCrtl.navigateBack('/home/parametres/adherents');
-        });
+        }
+        );
       });
     }
   }

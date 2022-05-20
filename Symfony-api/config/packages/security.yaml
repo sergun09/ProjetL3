@@ -23,7 +23,7 @@ security:
             lazy: true
             provider: app_user_provider
             json_login :
-                check_path: app_login
+                check_path: api_login
                 username_path: uuid
                 password_path: password
             #custom_authenticator: App\Security\AppAuthAuthenticator
