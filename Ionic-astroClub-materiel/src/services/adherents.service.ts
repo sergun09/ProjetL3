@@ -16,7 +16,12 @@ export class AdherentsService {
 
   public getAllUsers(): Observable<Array<User>> {
     return this.http.get<User>(this.server,
-      { observe: 'body', responseType: 'json' })
+      {
+        observe: 'body', responseType: 'json',
+        headers: new HttpHeaders().set("Access-Control-Allow-Origin", "*")
+          .set("Content-Type", 'application/json')
+          .set("Access-Control-Allow-Credentials", "true")
+      })
       .pipe(map((data) => data['hydra:member']))
   }
 

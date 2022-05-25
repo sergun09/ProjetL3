@@ -32,7 +32,7 @@ export class NouvelAdherentPage implements OnInit {
         loadingEl.present();
         this.adherentService.createUser(this.user).subscribe(() => {
           loadingEl.dismiss();
-          this.navCrtl.navigateBack('/home/parametres/adherents');
+          //this.navCrtl.navigateBack('/home/parametres/adherents');
         }
         );
       });

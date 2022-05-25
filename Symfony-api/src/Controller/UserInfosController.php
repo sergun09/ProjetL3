@@ -17,9 +17,10 @@ class UserInfosController extends AbstractController
         $this->security = $security;
     }
 
+    #[Route('/api/me', name: 'api_login_infos', methods: ['GET'])]
     public function __invoke()
     {
         $user = $this->security->getUser();
-        return $user;
+        return $this->json(['user_infos' => $user]);
     }
 }
