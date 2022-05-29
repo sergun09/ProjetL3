@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/maintenance"></ion-back-button>
     </ion-buttons>
-    <ion-title>Ajout d'une Reparation</ion-title>
+    <ion-title>Modifier Reparation</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,19 +17,17 @@
           </ion-card-header>
           <ion-card-content>
             <form #f="ngForm" (ngSubmit)="onSubmitRep(f)">
-              <ion-item class="ion-marging-bottom">
-                <ion-label>Materiel</ion-label>
-                <ion-select cancelText="Cancel" okText="Confirmer" ngModel name="materiel">
-                  <ion-select-option *ngFor="let mat of materiels" [value]="mat.id">{{mat.intitule}}</ion-select-option>
-                </ion-select>
+              <ion-item>
+                <ion-label position="stacked">Nom</ion-label>
+                <ion-input type="text" ngModel [value]="reparation.nom" name="nom"></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label position="floating">Nom</ion-label>
-                <ion-input type="text" ngModel name="nom"></ion-input>
+                <ion-label position="stacked">Description</ion-label>
+                <ion-input type="text" ngModel [value]="reparation.description" name="description"></ion-input>
               </ion-item>
               <ion-item class="ion-marging-bottom">
-                <ion-label position="floating">Description</ion-label>
-                <ion-input type="text" ngModel  name="description"></ion-input>
+                <ion-label position="stacked">Materiel</ion-label>
+                <ion-input type="text" ngModel [value]="reparation.materiel?.intitule" name="materiel" disabled></ion-input>
               </ion-item>
               <ion-button type="submit" color="primary" expand="block" class="ion-marging-top">Valider</ion-button>
               <ion-button type="reset" color="primary" expand="block">Réinitialiser</ion-button>

@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'nouvelle-reparation',
     loadChildren: () => import('./nouvelle-reparation/nouvelle-reparation.module').then( m => m.NouvelleReparationPageModule)
+  },
+  {
+    path: ':reparationId',
+    loadChildren: () => import('./reparation-det/reparation-det.module').then( m => m.ReparationDetPageModule)
   }
 ];
 

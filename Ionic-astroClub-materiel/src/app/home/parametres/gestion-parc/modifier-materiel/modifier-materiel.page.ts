@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { LoadingController, NavController } from '@ionic/angular';
+import { Inventaire } from 'src/entity/Inventaire';
 import { InventairePost } from 'src/entity/InventairePost';
 import { TypeMateriel } from 'src/entity/TypeMateriel';
 import { InventairesService } from 'src/services/inventaires.service';
 import { TypeMaterielService } from 'src/services/type-materiel.service';
 
 @Component({
-  selector: 'app-new-materiel',
-  templateUrl: './new-materiel.page.html',
-  styleUrls: ['./new-materiel.page.scss'],
+  selector: 'app-modifier-materiel',
+  templateUrl: './modifier-materiel.page.html',
+  styleUrls: ['./modifier-materiel.page.scss'],
 })
-export class NewMaterielPage implements OnInit {
+export class ModifierMaterielPage implements OnInit {
 
+  mat: Inventaire = new Inventaire();
   typeMateriels : Array<TypeMateriel> = Array();
   newMat : InventairePost = {
     typeMateriel: '',
@@ -23,38 +26,39 @@ export class NewMaterielPage implements OnInit {
     etat: '',
     emprunt: '',
     montantCaution: 0,
-    commentaire:'',
-    enMaintenance: false,
+    commentaire: '',
+    enMaintenance: this.mat.en_maintenance,
   };
 
   constructor(
     private typeMatService: TypeMaterielService,
     private loadingCrtl: LoadingController,
     private navCtrl: NavController,
-    private inventaireService: InventairesService
-    ) { }
+    private route: ActivatedRoute,
+    private inventaireService: InventairesService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewWillEnter(){
-    this.loadingCrtl.create({keyboardClose : true, message : 'Veuillez patienter...'}).then(loadingEl =>
-      {
-        loadingEl.present();
-          this.typeMatService.getAllTypeMat().subscribe(response => {
-            this.typeMateriels= response;
-            loadingEl.dismiss();
-      })
+    this.loadingCrtl.create({keyboardClose: true, message : 'Veuillez patienter...'}).then(loadingEl =>{
+      loadingEl.present();
+      this.route.paramMap.subscribe(paramMap =>{
+      if (!paramMap.has('materielId')) {
+        this.navCtrl.navigateBack('/home/parametres/gestion-parc');
+        return;
       }
-    )
+      this.typeMatService.getAllTypeMat().subscribe(response => {
+        this.typeMateriels= response;
+      })
+      this.inventaireService.getOneInventaire(Number(paramMap.get('materielId'))).subscribe(response => {
+        this.mat = response;
+        loadingEl.dismiss();
+      })
+      })
+    })
   }
 
   onSubmitMat(form : NgForm){
-    if (Number(form.value.enMaintenance) === 0) {
-      this.newMat.enMaintenance = false;
-    }else{
-      this.newMat.enMaintenance = true;
-    }
     this.newMat.typeMateriel= '/api/type_materiels/'+(form.value.typeMateriel).toString();
     this.newMat.intitule= form.value.intitule;
     this.newMat.description= form.value.description;
@@ -66,7 +70,7 @@ export class NewMaterielPage implements OnInit {
     this.newMat.montantCaution= Number(form.value.caution);
     this.loadingCrtl.create({keyboardClose : true , message : 'Veuillez patienter...'}).then(loadingEl => {
       loadingEl.present();
-      this.inventaireService.createInventaire(this.newMat).subscribe(()=>{
+      this.inventaireService.modifierInventaire(this.mat.id,this.newMat).subscribe(()=>{
         loadingEl.dismiss();
         this.navCtrl.navigateBack('/home/parametres/gestion-parc');
       });

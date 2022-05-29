@@ -19,7 +19,7 @@
           <ion-list *ngIf="ready">
             <ion-item-sliding *ngFor="let inventaire of inventaires" #slidingInv >
               <ion-item>
-                <ion-label>{{inventaire.intitule}}</ion-label>
+                {{inventaire.intitule}}
               </ion-item>
               <ion-item-options side="end">
                 <ion-item-option color="danger" (click)="onDeleteMat(inventaire.id,slidingInv)">
@@ -27,7 +27,7 @@
                 </ion-item-option>
               </ion-item-options>
               <ion-item-options side="start">
-                <ion-item-option color="warning">
+                <ion-item-option color="warning"  [routerLink]="['/','home','parametres','gestion-parc',inventaire.id]">
                   <ion-icon name="create-outline"></ion-icon>
                 </ion-item-option>
               </ion-item-options>

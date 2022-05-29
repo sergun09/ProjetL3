@@ -13,22 +13,23 @@
       <ion-button class="ion-marging-top" expand="block" routerLink="/home/maintenance/nouvelle-reparation"><ion-icon slot="start" name="add-outline"></ion-icon>Ajouter</ion-button>
       <ion-button class="ion-marging-top" expand="block" routerLink="">Signalement</ion-button>
       <ion-card>
-        <ion-card-content>
-          <ion-list>
-        <ion-item>
-          <ion-label>Reparation 1 / Materiel 1</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Reparation 2 / Materiel 2</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Reparation 3 / Materiel 3</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Reparation 4 / Materiel 4</ion-label>
-        </ion-item>
-      </ion-list>
+        <ion-card-content *ngIf="ready">
+          <ion-list *ngFor="let reparation of reparations" >
+              <ion-item detail [routerLink]="['/','home','maintenance',reparation.id]">
+                <ion-label>{{reparation.nom}} / {{reparation.materiel?.intitule}} </ion-label>
+              </ion-item>
+          </ion-list>
         </ion-card-content>
+          <div *ngIf="!ready">
+             <ion-grid>
+              <ion-row>
+                <ion-col size-sm="2" offset-sm="5">
+                  <h5 >Loading...</h5>
+                  <ion-spinner color="primary"></ion-spinner>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
       </ion-card>
     </ion-card-content>
   </ion-card>

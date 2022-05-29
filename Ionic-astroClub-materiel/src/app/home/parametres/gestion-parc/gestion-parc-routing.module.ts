@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'new-materiel',
     loadChildren: () => import('./new-materiel/new-materiel.module').then( m => m.NewMaterielPageModule)
+  },
+  {
+    path: ':materielId',
+    loadChildren: () => import('./modifier-materiel/modifier-materiel.module').then( m => m.ModifierMaterielPageModule)
   }
 ];
 

@@ -1,35 +1,34 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Inventaire } from 'src/entity/Inventaire';
-import { UserPost } from 'src/entity/UserPost';
-import { InventairePost } from 'src/entity/InventairePost';
+import { Reparation } from 'src/entity/reparation';
+import { ReparationPost } from 'src/entity/reparationPost';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InventairesService {
+export class ReparationService {
 
-  private server: string = "http://localhost:5000/api/materiels";
+  private server: string = "http://localhost:5000/api/reparations";
 
   constructor(private http: HttpClient) { }
 
-  public getAllInventaires(): Observable<Array<Inventaire>> {
-    return this.http.get<Inventaire>(this.server,
+  public getAllReparations(): Observable<Array<Reparation>> {
+    return this.http.get<Reparation>(this.server,
       { observe: 'body', responseType: 'json' })
       .pipe(map((data) => data['hydra:member']))
   }
 
 
-  public getOneInventaire(id: number): Observable<Inventaire> {
-    return this.http.get<Inventaire>(this.server + "/" + id.toString(),
+  public getOneReparation(id: number): Observable<Reparation> {
+    return this.http.get<Reparation>(this.server + "/" + id.toString(),
       { observe: 'body', responseType: 'json' })
   }
 
-  public createInventaire(inventaire: InventairePost): Observable<boolean> {
+  public createReparation(reparation: ReparationPost): Observable<boolean> {
     return this.http.post(this.server,
-      inventaire,
+      reparation,
       {
         observe: 'response',
         responseType: 'json',
@@ -37,16 +36,17 @@ export class InventairesService {
       .pipe(map((response) => response.status === 201))
   }
 
-  public modifierInventaire(id: number, mat: InventairePost): Observable<boolean>{
+  public modifierReparation(id: number, rep: ReparationPost): Observable<boolean>{
     return this.http.put(this.server+'/'+id,
-      mat,
+      rep,
       {observe: 'response', responseType: 'json'})
       .pipe(map((response)=>response.status===200));
   }
 
-  public deleteInventaireFromId(id: number): Observable<boolean> {
+  public deleteReparationFromId(id: number): Observable<boolean> {
     return this.http.delete(this.server + "/" + id.toString(),
       { observe: 'response', responseType: 'json' })
       .pipe(map((response) => response.status === 204))
   }
+
 }

@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/maintenance"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" [routerLink]="['/','home','maintenance',reparation.id, reparation.id]"><ion-icon name="create-outline"></ion-icon></ion-button>
+      <ion-button slot="icon-only" (click)="onDeleteRep(reparation.id)"><ion-icon name="trash-outline" color="danger"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>{{reparation.nom}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card>
+          <ion-card-content>
+              <ion-item>
+                <ion-label>Materiel: </ion-label>
+                {{ reparation.materiel?.intitule}}
+              </ion-item>
+              <ion-item>
+                <ion-label>Description :  </ion-label>
+                {{ reparation.description}}
+              </ion-item>
+          </ion-card-content>
+        </ion-card>
+  <ion-button class="ion-marging-top" expand="block" routerLink="">Maintenance</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

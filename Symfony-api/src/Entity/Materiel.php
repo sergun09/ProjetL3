@@ -26,11 +26,11 @@ class Materiel
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:collection','write'])]
+    #[Groups(['read:collection','write','read:reparation'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection','write'])]
+    #[Groups(['read:collection','write','read:reparation'])]
     private $intitule;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
