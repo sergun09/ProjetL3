@@ -40,6 +40,11 @@ export class IdentitePage implements OnInit {
             this.user = u;
             alert("User recupéré")
             localStorage.setItem("user", JSON.stringify(this.user))
+            console.log(JSON.parse(localStorage.getItem("user")) as User);
+            var m = JSON.parse(localStorage.getItem("user")) as User
+            console.log("User log : " + m.nom);
+            console.log("User log : " + m.roles);
+
             loadingEl.dismiss();
           }, (error) => console.log(error))
         },

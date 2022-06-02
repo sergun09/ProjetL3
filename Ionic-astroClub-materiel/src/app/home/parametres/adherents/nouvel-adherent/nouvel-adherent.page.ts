@@ -15,7 +15,8 @@ export class NouvelAdherentPage implements OnInit {
     {
       uuid: "",
       password: "",
-      nom: ""
+      nom: "",
+      roles: new Array()
     }
   constructor(private adherentService: AdherentsService, private loadingCrtl: LoadingController, private navCrtl: NavController) { }
 
@@ -28,6 +29,7 @@ export class NouvelAdherentPage implements OnInit {
       this.user.nom = nom;
       this.user.uuid = uuid.toString();
       this.user.password = uuid.toString();
+      this.user.roles = ["ROLE_USER"]
       this.loadingCrtl.create({ keyboardClose: true, message: 'Veuillez patienter...' }).then(loadingEl => {
         loadingEl.present();
         this.adherentService.createUser(this.user).subscribe(() => {

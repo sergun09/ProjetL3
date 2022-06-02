@@ -21,6 +21,6 @@ class UserInfosController extends AbstractController
     public function __invoke()
     {
         $user = $this->security->getUser();
-        return $this->json(['user_infos' => $user]);
+        return $this->json($user);
     }
 }

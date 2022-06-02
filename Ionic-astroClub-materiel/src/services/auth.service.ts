@@ -40,7 +40,7 @@ export class AuthService {
       })
   }
 
-  public GetSession(): string {
-    return JSON.parse(localStorage.getItem("user"));
+  public getUserSession(): User {
+    return JSON.parse(localStorage.getItem("user")) as User;
   }
 }
