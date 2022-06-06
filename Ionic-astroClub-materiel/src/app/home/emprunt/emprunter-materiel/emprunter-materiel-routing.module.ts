@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: EmprunterMaterielPage
+  },
+  {
+    path: 'resultats-recherche',
+    loadChildren: () => import('./resultats-recherche/resultats-recherche.module').then( m => m.ResultatsRecherchePageModule)
   }
 ];
 

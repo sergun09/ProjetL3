@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ReservationPage } from './resultats-recherche.page';
+import { InventairesPage } from './resultats-recherche.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ReservationPage
+    component: InventairesPage
   },
   {
     path: ':materielId',

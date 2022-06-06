@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from 'src/entity/User';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  
-  constructor() {}
 
+  public user : User;
+
+  constructor(private authService :AuthService) {}
+
+  ionViewWillEnter(){
+    this.user = this.authService.getUserSession();
+  }
 }

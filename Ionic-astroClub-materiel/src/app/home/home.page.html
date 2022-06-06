@@ -13,7 +13,8 @@
           <ion-card>
             <ion-card-header>
               <ion-card-title>
-                <strong>Bienvenue sur AstroClub</strong>
+                <strong *ngIf="user === null">Bienvenue sur AstroClub</strong>
+                <strong *ngIf="user !== null">Bienvenue sur AstroClub {{user?.nom}} </strong>
               </ion-card-title>
             </ion-card-header>
             <ion-card-content>

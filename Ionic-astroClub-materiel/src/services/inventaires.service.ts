@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Inventaire } from 'src/entity/Inventaire';
-import { UserPost } from 'src/entity/UserPost';
 import { InventairePost } from 'src/entity/InventairePost';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InventairesService {
+
+  public inventairesByFilter: Array<Inventaire> = new Array();
 
   private server: string = "http://localhost:5000/api/materiels";
 
@@ -18,6 +19,26 @@ export class InventairesService {
   public getAllInventaires(): Observable<Array<Inventaire>> {
     return this.http.get<Inventaire>(this.server,
       { observe: 'body', responseType: 'json' })
+      .pipe(map((data) => data['hydra:member']))
+  }
+
+  public getInventairesByFilter(selectedEtat: string, selectedIntitule: string, selectedType: string, selectedEmprunt: string): Observable<Array<Inventaire>> {
+    let params= new HttpParams();
+    if(selectedEmprunt !== '' && selectedEmprunt !== null){
+      params = params.append('emprunt',selectedEmprunt);
+    }
+    if(selectedEtat !== '' && selectedEtat !== null){
+      params = params.append('etat',selectedEtat);
+    }
+    if(selectedIntitule !== '' && selectedIntitule !== null){
+      params = params.append('intitule',selectedIntitule);
+    }
+    if(selectedType !== '/api/type_materiels/' && selectedType !== null){
+      params = params.append('typeMateriel',selectedType);
+    }
+
+    return this.http.get<Inventaire>(this.server,
+      { observe: 'body', responseType: 'json', params : params})
       .pipe(map((data) => data['hydra:member']))
   }
 

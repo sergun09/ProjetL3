@@ -3,47 +3,37 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/emprunt"></ion-back-button>
     </ion-buttons>
-    <ion-title>Menu Emprunter</ion-title>
+    <ion-title>Retour</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-item>
       <ion-label>Type</ion-label>
-      <ion-select multiple="true" cancelText="Cancel" okText="Confirmer">
-        <ion-select-option value="type1">type1</ion-select-option>
-        <ion-select-option value="type2">type2</ion-select-option>
-        <ion-select-option value="type3">type3</ion-select-option>
+      <ion-select cancelText="Cancel" okText="Confirmer" ngModel name="type">
+        <ion-select-option *ngFor="let typeMateriel of typeMateriels" [value]="typeMateriel.id "> {{typeMateriel.nom}} </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Intitulé</ion-label>
-      <ion-select multiple="true" cancelText="Cancel" okText="Confirmer">
-        <ion-select-option value="type1">type1</ion-select-option>
-        <ion-select-option value="type2">type2</ion-select-option>
-        <ion-select-option value="type3">type3</ion-select-option>
+      <ion-select cancelText="Cancel" okText="Confirmer" ngModel name="intitule">
+        <ion-select-option *ngFor="let materiel of inventaires" [value]="materiel.intitule"> {{materiel.intitule}} </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Etat</ion-label>
-      <ion-select multiple="true" cancelText="Cancel" okText="Confirmer">
-        <ion-select-option value="type1">type1</ion-select-option>
-        <ion-select-option value="type2">type2</ion-select-option>
-        <ion-select-option value="type3">type3</ion-select-option>
+      <ion-select cancelText="Cancel" okText="Confirmer" ngModel name="etat">
+        <ion-select-option *ngFor="let materiel of inventaires" [value]="materiel.etat"> {{materiel.etat}} </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item class="ion-margin-bottom">
       <ion-label>Emprunt</ion-label>
-      <ion-select multiple="true" cancelText="Cancel" okText="Confirmer" [value]="['type1', 'type2']">
-        <ion-select-option value="type1">type1</ion-select-option>
-        <ion-select-option value="type2">type2</ion-select-option>
-        <ion-select-option value="type3">type3</ion-select-option>
-        <ion-select-option value="type4">type4</ion-select-option>
+      <ion-select  cancelText="Cancel" okText="Confirmer" ngModel name="emprunt">
+        <ion-select-option *ngFor="let materiel of inventaires" [value]="materiel.emprunt"> {{materiel.emprunt}} </ion-select-option>
       </ion-select>
     </ion-item>
-
-  </ion-list>
-  <ion-button class="ion-marging-top" expand="block" routerLink=""><ion-icon  slot="start" name="search-outline"></ion-icon>Lancer la Recherche</ion-button>
+    <ion-button type="reset" class="ion-marging-bottom" expand="block"><ion-icon slot="start" name="refresh-outline"></ion-icon> Réinitialiser</ion-button>
+  <ion-button type="submit" class="ion-marging-top" expand="block"><ion-icon  slot="start" name="search-outline"></ion-icon>Lancer la Recherche</ion-button>
+</form>
 </ion-content>

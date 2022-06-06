@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home/inventaire"></ion-back-button>
+      <ion-back-button defaultHref="/home/reservation"></ion-back-button>
     </ion-buttons>
-    <ion-title>Inventaire</ion-title>
+    <ion-title>Résultats de la Recherche</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,10 +12,11 @@
     <ion-row>
       <ion-col size="12" size-sm="8" offset-md="2">
         <ion-list>
-          <ion-item *ngFor="let materiel of inventaires"  >
+          <ion-item *ngFor="let materiel of inventaires" [routerLink]="['/','home','reservation','resultats-recherche',materiel.id]" detail>
             {{materiel.intitule}}
           </ion-item>
         </ion-list>
+        <ion-button type="button" class="ion-marging-top" expand="block" routerLink="" >Réserver</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

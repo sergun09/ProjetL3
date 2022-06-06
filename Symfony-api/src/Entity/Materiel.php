@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\MaterielRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,7 +22,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'normalization_context' => ['groups'=> ['read:collection', 'read:item', 'read:materiel']]
         ]
     ]
-)]
+        ),ApiFilter(SearchFilter::class, properties: ['typeMateriel' => 'exact', 'intitule'  => 'exact', 'etat'  => 'exact', 'emprunt'  => 'exact'])
+        ]
 class Materiel
 {
     #[ORM\Id]
@@ -67,7 +70,7 @@ class Materiel
 
     #[ORM\ManyToOne(targetEntity: TypeMateriel::class, inversedBy: 'materiels')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(["read:item",'write'])]
+    #[Groups(["read:item",'write','read:collection'])]
     private $typeMateriel;
 
     #[ORM\OneToMany(mappedBy: 'materiel', targetEntity: Emprunt::class)]

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { Inventaire } from 'src/entity/Inventaire';
-import {InventairesService} from "../../../../services/inventaires.service";
+import { InventairesService } from 'src/services/inventaires.service';
 
 @Component({
   selector: 'app-resultat-recherche',
@@ -19,7 +19,7 @@ export class InventairesPage implements OnInit {
   }
 
   ionViewWillEnter(){
-/*     if (this.inventairesService.inventairesByFilter.length===0) {
+  /*   if (this.inventairesService.inventairesByFilter.length===0) {
       this.loadingCrtl.create({keyboardClose : true, message : 'Veuillez patienter...'}).then(loadingEl =>{
         loadingEl.present();
         this.inventairesService.getAllInventaires().subscribe((response) => {
