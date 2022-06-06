@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HasRoleGuard } from 'src/app/has-role.guard';
 
 import { ParametresPage } from './parametres.page';
 
@@ -14,11 +15,22 @@ const routes: Routes = [
   },
   {
     path: 'adherents',
-    loadChildren: () => import('./adherents/adherents.module').then(m => m.AdherentsPageModule)
+    loadChildren: () => import('./adherents/adherents.module').then(m => m.AdherentsPageModule),
+    canActivate: [HasRoleGuard],
+    data:
+    {
+      role: 'ROLE_ADMIN'
+    }
   },
   {
     path: 'gestion-parc',
-    loadChildren: () => import('./gestion-parc/gestion-parc.module').then(m => m.GestionParcPageModule)
+    loadChildren: () => import('./gestion-parc/gestion-parc.module').then(m => m.GestionParcPageModule),
+    canActivate: [HasRoleGuard],
+    data:
+    {
+      role: 'ROLE_ADMIN'
+    }
+
   }
 ];
 
