@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/emprunt/mes-emprunts"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{emprunt.materiel?.intitule}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card>
+          <ion-card-content>
+              <ion-item>
+                <ion-label>Motif :  </ion-label>
+                {{ emprunt.motif }}
+              </ion-item>
+              <ion-item>
+                <ion-label>Date Debut :  </ion-label>
+                {{ dateDebut }}
+              </ion-item>
+              <ion-item>
+                <ion-label>Date Fin :  </ion-label>
+                {{ dateFin}}
+              </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-grid>
+          <ion-row>
+            <ion-col size-md="3" >
+              <ion-button (click)="onDescMod()"><ion-icon slot="icon-only" name="document-text-outline"></ion-icon></ion-button>
+            </ion-col>
+            <ion-col size-md="3" >
+              <ion-button (click)="onRender()"><ion-icon  slot="icon-only" name="return-down-back-outline"></ion-icon></ion-button>
+            </ion-col>
+            <ion-col size-md="3" >
+              <ion-button ><ion-icon slot="icon-only" name="send-outline"></ion-icon></ion-button>
+            </ion-col>
+            <ion-col size-md="3" >
+              <ion-button ><ion-icon slot="icon-only" name="construct-outline"></ion-icon></ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -2,34 +2,54 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EmpruntRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EmpruntRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read:collection']],
+    denormalizationContext: ['groups' => ['write']], 
+    itemOperations: [
+        'put' ,
+        'delete',
+        'get' => [
+            'normalization_context' => ['groups'=> ['read:collection', 'read:item', 'read:emprunt']]
+        ]
+    ]
+        ),ApiFilter(SearchFilter::class, properties: ['adherent' => 'exact'])
+        ]
 class Emprunt
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read:collection', 'read:item', 'write'])]
     private $id;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups(['read:collection', 'read:item', 'write'])]
     private $datedebut;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups(['read:collection', 'read:item', 'write'])]
     private $datefin;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection', 'read:item', 'write'])]
     private $motif;
 
     #[ORM\ManyToOne(targetEntity: Materiel::class, inversedBy: 'emprunts')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(['read:collection', 'read:item', 'write'])]
     private $materiel;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'emprunts')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(['write'])]
     private $adherent;
 
     public function getId(): ?int

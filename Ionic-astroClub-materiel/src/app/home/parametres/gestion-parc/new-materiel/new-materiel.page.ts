@@ -55,6 +55,7 @@ export class NewMaterielPage implements OnInit {
     }else{
       this.newMat.enMaintenance = true;
     }
+
     this.newMat.typeMateriel= '/api/type_materiels/'+(form.value.typeMateriel).toString();
     this.newMat.intitule= form.value.intitule;
     this.newMat.description= form.value.description;

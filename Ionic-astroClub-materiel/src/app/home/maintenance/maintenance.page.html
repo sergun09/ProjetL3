@@ -14,8 +14,8 @@
       <ion-button class="ion-marging-top" expand="block" routerLink="">Signalement</ion-button>
       <ion-card>
         <ion-card-content *ngIf="ready">
-          <ion-list *ngFor="let reparation of reparations" >
-              <ion-item detail [routerLink]="['/','home','maintenance',reparation.id]">
+          <ion-list >
+              <ion-item *ngFor="let reparation of reparations" detail [routerLink]="['/','home','maintenance',reparation.id]">
                 <ion-label>{{reparation.nom}} / {{reparation.materiel?.intitule}} </ion-label>
               </ion-item>
           </ion-list>

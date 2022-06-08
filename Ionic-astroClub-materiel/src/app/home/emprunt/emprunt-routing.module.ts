@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HasRoleGuard } from 'src/app/has-role.guard';
 
 import { EmpruntPage } from './emprunt.page';
 
@@ -18,7 +19,12 @@ const routes: Routes = [
   },
   {
     path: 'emprunts-tiers',
-    loadChildren: () => import('./emprunts-tiers/emprunts-tiers.module').then( m => m.EmpruntsTiersPageModule)
+    loadChildren: () => import('./emprunts-tiers/emprunts-tiers.module').then( m => m.EmpruntsTiersPageModule),
+    canActivate: [HasRoleGuard],
+    data:
+    {
+      role: 'ROLE_ADMIN'
+    }
   }
 ];
 
