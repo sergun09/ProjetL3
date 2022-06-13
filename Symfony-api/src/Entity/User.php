@@ -49,6 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->emprunts = new ArrayCollection();
+        $this->dysfonctionnements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -161,5 +162,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Dysfonctionnement>
+     */
+    public function getDysfonctionnements(): Collection
+    {
+        return $this->dysfonctionnements;
     }
 }

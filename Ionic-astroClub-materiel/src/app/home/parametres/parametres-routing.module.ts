@@ -16,11 +16,11 @@ const routes: Routes = [
   {
     path: 'adherents',
     loadChildren: () => import('./adherents/adherents.module').then(m => m.AdherentsPageModule),
-    canActivate: [HasRoleGuard],
-    data:
-    {
-      role: 'ROLE_ADMIN'
-    }
+    // canActivate: [HasRoleGuard],
+    // data:
+    // {
+    //   role: 'ROLE_ADMIN'
+    // }
   },
   {
     path: 'gestion-parc',
@@ -30,7 +30,6 @@ const routes: Routes = [
     {
       role: 'ROLE_ADMIN'
     }
-
   }
 ];
 

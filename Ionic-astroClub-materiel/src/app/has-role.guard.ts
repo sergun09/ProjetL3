@@ -16,7 +16,6 @@ export class HasRoleGuard implements CanActivate {
     const auth = user.roles.includes(route.data.role);
     if (!auth)
       alert("Seul l'administrateur peut accéder à ce menu !")
-
     return auth;
   }
 

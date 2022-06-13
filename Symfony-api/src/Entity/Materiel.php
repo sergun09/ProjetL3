@@ -12,65 +12,54 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: MaterielRepository::class)]
-#[ApiResource(
-    normalizationContext: ['groups' => ['read:collection']],
-    denormalizationContext: ['groups' => ['write']], 
-    itemOperations: [
-        'put' ,
-        'delete',
-        'get' => [
-            'normalization_context' => ['groups'=> ['read:collection', 'read:item', 'read:materiel']]
-        ]
-    ]
-        ),ApiFilter(SearchFilter::class, properties: ['typeMateriel' => 'exact', 'intitule'  => 'exact', 'etat'  => 'exact', 'emprunt'  => 'exact'])
-        ]
+#[ApiResource(normalizationContext: ['groups' => ['read:collection']], denormalizationContext: ['groups' => ['write']], itemOperations: ['put','delete','patch','get' => ['normalization_context' => ['groups' => ['read:collection', 'read:item', 'read:materiel']]]]),ApiFilter(SearchFilter::class, properties: ['typeMateriel' => 'exact', 'intitule'  => 'exact', 'etat'  => 'exact', 'emprunt'  => 'exact', 'enMaintenance'  => 'exact'])]
 class Materiel
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:collection','write','read:reparation', 'read:emprunt'])]
+    #[Groups(['read:collection', 'write', 'read:reparation', 'read:emprunt'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection','write','read:reparation', 'read:emprunt'])]
+    #[Groups(['read:collection', 'write', 'read:reparation', 'read:emprunt'])]
     private $intitule;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['read:collection','write'])]
+    #[Groups(['read:collection', 'write'])]
     private $description;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection','write'])]
+    #[Groups(['read:collection', 'write'])]
     private $kit;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection','write'])]
+    #[Groups(['read:collection', 'write'])]
     private $conditionnement;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection','write'])]
+    #[Groups(['read:collection', 'write'])]
     private $etat;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection','write', 'read:emprunt'])]
+    #[Groups(['read:collection', 'write', 'read:emprunt'])]
     private $emprunt;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    #[Groups(['read:collection','write'])]
+    #[Groups(['read:collection', 'write'])]
     private $montantCaution;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['read:collection','write'])]
+    #[Groups(['read:collection', 'write'])]
     private $commentaire;
 
     #[ORM\Column(type: 'boolean')]
-    #[Groups(['read:collection','write'])]
+    #[Groups(['read:collection', 'write'])]
     private $enMaintenance;
 
     #[ORM\ManyToOne(targetEntity: TypeMateriel::class, inversedBy: 'materiels')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(["read:item",'write','read:collection'])]
+    #[Groups(["read:item", 'write', 'read:collection'])]
     private $typeMateriel;
 
     #[ORM\OneToMany(mappedBy: 'materiel', targetEntity: Emprunt::class)]
