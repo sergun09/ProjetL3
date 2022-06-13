@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button slot="icon-only" [routerLink]="['/','home','maintenance',reparation.id, reparation.id]"><ion-icon name="create-outline"></ion-icon></ion-button>
-      <ion-button slot="icon-only" (click)="onDeleteRep(reparation.id)"><ion-icon name="trash-outline" color="danger"></ion-icon></ion-button>
+      <ion-button slot="icon-only" (click)="onDeleteRep(reparation.id)"><ion-icon color="danger" name="remove-circle-outline"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title>{{reparation.nom}}</ion-title>
   </ion-toolbar>

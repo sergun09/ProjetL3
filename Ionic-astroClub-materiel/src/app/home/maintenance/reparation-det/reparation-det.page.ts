@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ActionSheetController, LoadingController, NavController } from '@ionic/angular';
 import { Reparation } from 'src/entity/reparation';
+import { InventairesService } from 'src/services/inventaires.service';
 import { ReparationService } from 'src/services/reparation.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class ReparationDetPage implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private loadingCrtl : LoadingController,
     private route: ActivatedRoute,
+    private inventaireService: InventairesService ,
     private reparationService: ReparationService,
     private navCtrl: NavController) { }
 
@@ -41,7 +43,7 @@ export class ReparationDetPage implements OnInit {
 
   onDeleteRep(id : number){
     this.actionSheetCtrl.create({
-      header : 'ETES-VOUS SUR DE VOULOIR LE SUPPRIMER ?',
+      header : "ETES-VOUS SUR QUE C'EST DEJA REPARER ?",
       buttons: [
         {
           text: 'Yes',
@@ -49,9 +51,10 @@ export class ReparationDetPage implements OnInit {
             this.loadingCrtl.create({keyboardClose : true, message : 'Veuillez patienter...'}).then(loadingEl => {
               loadingEl.present();
               this.reparationService.deleteReparationFromId(id).subscribe(() => {
-                loadingEl.dismiss();
-                this.navCtrl.navigateBack('/home/maintenance');
+              loadingEl.dismiss();
+              this.navCtrl.navigateBack('/home/maintenance');
             })
+            this.inventaireService.modifierInventaireEnMaintenance(this.reparation.materiel?.id, false).subscribe();
             })
           }
         },

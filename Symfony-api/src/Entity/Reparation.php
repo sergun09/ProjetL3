@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     itemOperations: [
         'put' ,
         'delete',
+        'patch',
         'get' => [
             'normalization_context' => ['groups'=> ['read:collection','read:item','read:reparation']]
         ]

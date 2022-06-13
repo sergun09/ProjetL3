@@ -17,7 +17,7 @@ import { DisfonctionnementComponent } from './disfonctionnement/disfonctionnemen
     IonicModule,
     EmpruntDetPageRoutingModule
   ],
-  declarations: [EmpruntDetPage, DescriptionComponent,  DisfonctionnementComponent],
+  declarations: [EmpruntDetPage, DescriptionComponent, DisfonctionnementComponent],
   entryComponents:[DescriptionComponent]
 })
 export class EmpruntDetPageModule {}

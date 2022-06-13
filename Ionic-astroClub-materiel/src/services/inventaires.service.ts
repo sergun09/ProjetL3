@@ -42,6 +42,17 @@ export class InventairesService {
       .pipe(map((data) => data['hydra:member']))
   }
 
+  public getInventairesByMaintenance(): Observable<Array<Inventaire>> {
+    let params= new HttpParams();
+
+
+      params = params.append('enMaintenance',false);
+
+    return this.http.get<Inventaire>(this.server,
+      { observe: 'body', responseType: 'json', params : params})
+      .pipe(map((data) => data['hydra:member']))
+  }
+
 
   public getOneInventaire(id: number): Observable<Inventaire> {
     return this.http.get<Inventaire>(this.server + "/" + id.toString(),
@@ -63,6 +74,15 @@ export class InventairesService {
       mat,
       {observe: 'response', responseType: 'json'})
       .pipe(map((response)=>response.status===200));
+  }
+
+  public modifierInventaireEnMaintenance(id: number, enMaintenance: boolean): Observable<boolean>{
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const headers = {'Content-Type': 'application/merge-patch+json'};
+    return this.http.patch(this.server+'/'+id,
+    {enMaintenance},
+    {headers,observe: 'response', responseType: 'json'})
+    .pipe(map((response)=>response.status===200));
   }
 
   public deleteInventaireFromId(id: number): Observable<boolean> {

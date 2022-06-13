@@ -12,7 +12,19 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: MaterielRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['read:collection']], denormalizationContext: ['groups' => ['write']], itemOperations: ['put','delete','patch','get' => ['normalization_context' => ['groups' => ['read:collection', 'read:item', 'read:materiel']]]]),ApiFilter(SearchFilter::class, properties: ['typeMateriel' => 'exact', 'intitule'  => 'exact', 'etat'  => 'exact', 'emprunt'  => 'exact', 'enMaintenance'  => 'exact'])]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read:collection']],
+    denormalizationContext: ['groups' => ['write']], 
+    itemOperations: [
+        'put' ,
+        'delete',
+        'patch',
+        'get' => [
+            'normalization_context' => ['groups'=> ['read:collection', 'read:item', 'read:materiel']]
+        ]
+    ]
+        ),ApiFilter(SearchFilter::class, properties: ['typeMateriel' => 'exact', 'intitule'  => 'exact', 'etat'  => 'exact', 'emprunt'  => 'exact', 'enMaintenance'  => 'exact'])
+        ]
 class Materiel
 {
     #[ORM\Id]

@@ -16,18 +16,6 @@ export class NouvelleReparationPage implements OnInit {
 
   materiels: Array<Inventaire> = Array();
   materiel: Inventaire;
-  newMat : InventairePost = {
-    typeMateriel: '',
-    intitule: '',
-    description: '',
-    kit: '',
-    conditionnement: '',
-    etat: '',
-    emprunt: '',
-    montantCaution: 0,
-    commentaire:'',
-    enMaintenance: false,
-  };
   newRep : ReparationPost = {
     nom: '',
     description: '',
@@ -47,7 +35,7 @@ export class NouvelleReparationPage implements OnInit {
     this.loadingCrtl.create({keyboardClose : true, message : 'Veuillez patienter...'}).then(loadingEl =>
       {
         loadingEl.present();
-          this.inventaireService.getAllInventaires().subscribe(response => {
+          this.inventaireService.getInventairesByMaintenance().subscribe(response => {
             this.materiels= response;
             loadingEl.dismiss();
         })
@@ -61,26 +49,12 @@ export class NouvelleReparationPage implements OnInit {
     this.newRep.description= form.value.description;
     this.loadingCrtl.create({keyboardClose : true , message : 'Veuillez patienter...'}).then(loadingEl => {
       loadingEl.present();
-      this.reparationService.createReparation(this.newRep).subscribe();
-      this.inventaireService.getOneInventaire(form.value.materiel).subscribe(response => {
-        this.materiel= response;
-
-        this.newMat.typeMateriel= '/api/type_materiels/'+(this.materiel.typeMateriel?.id).toString();
-        this.newMat.intitule= this.materiel.intitule;
-        this.newMat.description= this.materiel.description;
-        this.newMat.kit= this.materiel.kit;
-        this.newMat.conditionnement= this.materiel.conditionnement;
-        this.newMat.etat= this.materiel.etat;
-        this.newMat.emprunt= this.materiel.emprunt;
-        this.newMat.commentaire= this.materiel.commentaire;
-        this.newMat.montantCaution= this.materiel.montant_caution;
-        this.newMat.enMaintenance=true;
-
-        this.inventaireService.modifierInventaire(this.materiel.id,this.newMat).subscribe(()=>{
-          loadingEl.dismiss();
-          this.navCtrl.navigateBack('/home/maintenance');
-        });
+      this.reparationService.createReparation(this.newRep).subscribe(() => {
+        this.inventaireService.modifierInventaireEnMaintenance(form.value.materiel,true).subscribe();
+        loadingEl.dismiss();
+        this.navCtrl.navigateBack('/home/maintenance');
       });
+
     });
   }
 }
