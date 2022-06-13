@@ -18,11 +18,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
     itemOperations: [
         'put' ,
         'delete',
+        'patch',
         'get' => [
             'normalization_context' => ['groups'=> ['read:collection', 'read:item', 'read:materiel']]
         ]
     ]
-        ),ApiFilter(SearchFilter::class, properties: ['typeMateriel' => 'exact', 'intitule'  => 'exact', 'etat'  => 'exact', 'emprunt'  => 'exact'])
+        ),ApiFilter(SearchFilter::class, properties: ['typeMateriel' => 'exact', 'intitule'  => 'exact', 'etat'  => 'exact', 'emprunt'  => 'exact', 'enMaintenance'  => 'exact'])
         ]
 class Materiel
 {

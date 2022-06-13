@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: EmpruntsTiersPage
+  },
+  {
+    path: ':empruntId',
+    loadChildren: () => import('./emprunt-det/emprunt-det.module').then( m => m.EmpruntDetPageModule)
   }
 ];
 
