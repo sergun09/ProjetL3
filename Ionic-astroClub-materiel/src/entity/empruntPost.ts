@@ -3,4 +3,5 @@ export class EmpruntPost {
   datefin: Date;
   motif: string;
   materiel: string;
+  adherent: string;
 }

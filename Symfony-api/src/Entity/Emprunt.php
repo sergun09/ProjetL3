@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'normalization_context' => ['groups'=> ['read:collection', 'read:item', 'read:emprunt']]
         ]
     ]
-        ),ApiFilter(SearchFilter::class, properties: ['adherent' => 'exact'])
+        ),ApiFilter(SearchFilter::class, properties: ['adherent' => 'exact', 'materiel' => 'exact'])
         ]
 class Emprunt
 {
@@ -50,7 +50,7 @@ class Emprunt
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'emprunts')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(['write'])]
+    #[Groups(['read:collection','write', 'read:item'])]
     private $adherent;
 
     public function getId(): ?int

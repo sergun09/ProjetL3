@@ -31,6 +31,17 @@ export class EmpruntService {
       .pipe(map((data) => data['hydra:member']))
   }
 
+  public getEmpruntsByMat(mat: string): Observable<Array<Emprunt>> {
+    let params= new HttpParams();
+    if(mat !== '' && mat !== null){
+      params = params.append('materiel',mat);
+    }
+
+    return this.http.get<Emprunt>(this.server,
+      { observe: 'body', responseType: 'json', params : params})
+      .pipe(map((data) => data['hydra:member']))
+  }
+
 
   public getOneEmprunt(id: number): Observable<Emprunt> {
     return this.http.get<Emprunt>(this.server + "/" + id.toString(),

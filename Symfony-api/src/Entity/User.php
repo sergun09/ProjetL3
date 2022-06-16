@@ -15,30 +15,30 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[ApiResource()]
+#[ApiResource(normalizationContext: ['groups' => ['read:collection']])]
 #[UniqueEntity(fields: ['uuid'], message: 'There is already an account with this uuid')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read'])]
+    #[Groups(['read:collection','read:emprunt'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(['read', 'write'])]
+    #[Groups(['read:collection', 'write'])]
     private $uuid;
 
     #[ORM\Column(type: 'json')]
-    #[Groups(['read'])]
+    #[Groups(['read:collection'])]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
-    #[Groups(['read', 'write'])]
+    #[Groups(['read:collection', 'write'])]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read', 'write'])]
+    #[Groups(['read:collection', 'write','read:emprunt'])]
     private $nom;
 
     #[ORM\OneToMany(mappedBy: 'adherent', targetEntity: Emprunt::class)]
@@ -49,7 +49,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->emprunts = new ArrayCollection();
-        $this->dysfonctionnements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -162,13 +161,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, Dysfonctionnement>
-     */
-    public function getDysfonctionnements(): Collection
-    {
-        return $this->dysfonctionnements;
     }
 }

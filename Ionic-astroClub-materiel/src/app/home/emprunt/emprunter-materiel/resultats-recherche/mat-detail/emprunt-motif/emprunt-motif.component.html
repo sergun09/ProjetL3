@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()"><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>Emprunt Motif</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card>
+          <ion-card-content>
+            <form #f="ngForm" (ngSubmit)="onSubmitRep(f)">
+              <ion-item>
+                <ion-label position="floating">Motif</ion-label>
+                <ion-input type="text" ngModel name="motif" required></ion-input>
+              </ion-item>
+              <hr>
+              <ion-button type="submit" color="primary" expand="block" class="ion-marging-top">Valider</ion-button>
+              <ion-button type="reset" color="primary" expand="block">Réinitialiser</ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

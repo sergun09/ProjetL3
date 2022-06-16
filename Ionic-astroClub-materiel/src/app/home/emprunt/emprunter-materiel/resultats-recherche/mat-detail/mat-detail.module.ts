@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MatDetailPageRoutingModule } from './mat-detail-routing.module';
 
 import { MatDetailPage } from './mat-detail.page';
+import { EmpruntMotifComponent } from './emprunt-motif/emprunt-motif.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { MatDetailPage } from './mat-detail.page';
     IonicModule,
     MatDetailPageRoutingModule
   ],
-  declarations: [MatDetailPage]
+  declarations: [MatDetailPage, EmpruntMotifComponent],
+  entryComponents:[EmpruntMotifComponent]
 })
 export class MatDetailPageModule {}

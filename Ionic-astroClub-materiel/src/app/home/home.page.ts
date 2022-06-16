@@ -10,7 +10,6 @@ import { AuthService } from 'src/services/auth.service';
 export class HomePage {
 
   public user : User;
-
   constructor(private authService :AuthService) {}
 
   ionViewWillEnter(){

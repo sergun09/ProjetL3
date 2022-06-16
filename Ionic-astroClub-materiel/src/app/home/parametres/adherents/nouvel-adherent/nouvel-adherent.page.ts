@@ -29,12 +29,11 @@ export class NouvelAdherentPage implements OnInit {
       this.user.nom = nom;
       this.user.uuid = uuid.toString();
       this.user.password = uuid.toString();
-      this.user.roles = ["ROLE_ADMIN"]
+      this.user.roles = ["ROLE_USER"]
       this.loadingCrtl.create({ keyboardClose: true, message: 'Veuillez patienter...' }).then(loadingEl => {
         loadingEl.present();
         this.adherentService.createUser(this.user).subscribe(() => {
           loadingEl.dismiss();
-          //this.navCrtl.navigateBack('/home/parametres/adherents');
         }
         );
       });
