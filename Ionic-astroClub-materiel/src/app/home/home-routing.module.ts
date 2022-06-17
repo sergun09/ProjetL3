@@ -11,7 +11,12 @@ const routes: Routes = [
   },
   {
     path: 'inventaire',
-    loadChildren: () => import('./inventaire/inventaire.module').then( m => m.InventairePageModule)
+    loadChildren: () => import('./inventaire/inventaire.module').then( m => m.InventairePageModule),
+    canActivate: [HasRoleGuard],
+    data:
+    {
+      role: 'ROLE_USER'
+    }
   },
   {
     path: 'emprunt',

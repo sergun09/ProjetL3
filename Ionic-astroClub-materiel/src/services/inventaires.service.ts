@@ -24,6 +24,7 @@ export class InventairesService {
 
   public getInventairesByFilter(selectedEtat: string, selectedIntitule: string, selectedType: string, selectedEmprunt: string): Observable<Array<Inventaire>> {
     let params= new HttpParams();
+
     if(selectedEmprunt !== '' && selectedEmprunt !== null){
       params = params.append('emprunt',selectedEmprunt);
     }
@@ -42,10 +43,21 @@ export class InventairesService {
       .pipe(map((data) => data['hydra:member']))
   }
 
-  public getInventairesByMaintenance(): Observable<Array<Inventaire>> {
+  public getInventairesByFilterEmprunt(selectedEtat: string, selectedIntitule: string, selectedType: string, selectedEmprunt: string): Observable<Array<Inventaire>> {
     let params= new HttpParams();
 
-
+    if(selectedEmprunt !== '' && selectedEmprunt !== null){
+      params = params.append('emprunt',selectedEmprunt);
+    }
+    if(selectedEtat !== '' && selectedEtat !== null){
+      params = params.append('etat',selectedEtat);
+    }
+    if(selectedIntitule !== '' && selectedIntitule !== null){
+      params = params.append('intitule',selectedIntitule);
+    }
+    if(selectedType !== '/api/type_materiels/' && selectedType !== null){
+      params = params.append('typeMateriel',selectedType);
+    }
       params = params.append('enMaintenance',false);
 
     return this.http.get<Inventaire>(this.server,

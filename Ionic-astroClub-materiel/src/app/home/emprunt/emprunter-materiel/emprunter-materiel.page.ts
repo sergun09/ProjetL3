@@ -56,7 +56,7 @@ export class EmprunterMaterielPage implements OnInit {
 
     this.loadingCrtl.create({keyboardClose : true, message : 'Veuillez patienter...'}).then(loadingEl =>{
      loadingEl.present();
-     this.inventairesService.getInventairesByFilter(this.etat,this.intitule,this.type,this.emprunt).subscribe((response) => {
+     this.inventairesService.getInventairesByFilterEmprunt(this.etat,this.intitule,this.type,this.emprunt).subscribe((response) => {
      this.inventairesService.inventairesByFilter = response;
      loadingEl.dismiss();
      this.navCtrl.navigateForward('/home/emprunt/emprunter-materiel/resultats-recherche');

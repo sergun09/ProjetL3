@@ -35,7 +35,7 @@ export class NouvelleReparationPage implements OnInit {
     this.loadingCrtl.create({keyboardClose : true, message : 'Veuillez patienter...'}).then(loadingEl =>
       {
         loadingEl.present();
-          this.inventaireService.getInventairesByMaintenance().subscribe(response => {
+          this.inventaireService.getAllInventaires().subscribe(response => {
             this.materiels= response;
             loadingEl.dismiss();
         })

@@ -3,18 +3,20 @@ import { NgForm } from '@angular/forms';
 import { LoadingController, ModalController, NavController } from '@ionic/angular';
 import { EmpruntPost } from 'src/entity/empruntPost';
 import { User } from 'src/entity/User';
+import { AdherentsService } from 'src/services/adherents.service';
 import { AuthService } from 'src/services/auth.service';
 import { EmpruntService } from 'src/services/emprunt.service';
 
 @Component({
-  selector: 'app-emprunt-motif',
-  templateUrl: './emprunt-motif.component.html',
-  styleUrls: ['./emprunt-motif.component.scss'],
+  selector: 'app-emprunt-gestionnaire',
+  templateUrl: './emprunt-gestionnaire.component.html',
+  styleUrls: ['./emprunt-gestionnaire.component.scss'],
 })
-export class EmpruntMotifComponent implements OnInit {
+export class EmpruntGestionnaireComponent implements OnInit {
 
   @Input() selectedMat : number;
   empruntPost : EmpruntPost = new EmpruntPost;
+  public lstAdherents :Array<User> = new Array();
   public user : User;
 
   constructor(
@@ -22,7 +24,7 @@ export class EmpruntMotifComponent implements OnInit {
     private  modalCtrl: ModalController,
     private empruntService: EmpruntService,
     private authService :AuthService,
-    private navCtrl: NavController
+    private adherentService : AdherentsService
   ) { }
 
   ngOnInit() {}
@@ -33,12 +35,19 @@ export class EmpruntMotifComponent implements OnInit {
 
   ionViewWillEnter(){
     this.user = this.authService.getUserSession();
+    this.loadingCrtl.create({keyboardClose: true, message : 'Veuillez patienter...'}).then(loadingEl =>{
+      loadingEl.present();
+      this.adherentService.getAllUsers().subscribe(response => {
+        this.lstAdherents = response;
+        loadingEl.dismiss();
+      })
+      })
   }
 
   onSubmitRep(form : NgForm){
     this.empruntPost.motif=form.value.motif;
     this.empruntPost.materiel='/api/materiels/'+(this.selectedMat).toString();
-    this.empruntPost.adherent='/api/users/'+(this.user.id).toString();
+    this.empruntPost.adherent='/api/users/'+(form.value.emprunt).toString();
     this.empruntPost.datedebut=new Date();
     this.empruntPost.datefin=this.empruntPost.datedebut;
 
