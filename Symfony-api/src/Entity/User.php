@@ -46,9 +46,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['read'])]
     private $emprunts;
 
+    #[ORM\OneToMany(mappedBy: 'adherent', targetEntity: Dysfonctionnement::class)]
+    private $dysfonctionnements;
+
+    #[ORM\OneToMany(mappedBy: 'emetteur', targetEntity: Transfert::class)]
+    private $transfertsEmetteur;
+
+    #[ORM\OneToMany(mappedBy: 'recepteur', targetEntity: Transfert::class)]
+    private $transfertRecepteur;
+
     public function __construct()
     {
         $this->emprunts = new ArrayCollection();
+        $this->dysfonctionnements = new ArrayCollection();
+        $this->transfertsEmetteur = new ArrayCollection();
+        $this->transfertRecepteur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -157,6 +169,96 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($emprunt->getAdherent() === $this) {
                 $emprunt->setAdherent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Dysfonctionnement>
+     */
+    public function getDysfonctionnements(): Collection
+    {
+        return $this->dysfonctionnements;
+    }
+
+    public function addDysfonctionnement(Dysfonctionnement $dysfonctionnement): self
+    {
+        if (!$this->dysfonctionnements->contains($dysfonctionnement)) {
+            $this->dysfonctionnements[] = $dysfonctionnement;
+            $dysfonctionnement->setAdherent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDysfonctionnement(Dysfonctionnement $dysfonctionnement): self
+    {
+        if ($this->dysfonctionnements->removeElement($dysfonctionnement)) {
+            // set the owning side to null (unless already changed)
+            if ($dysfonctionnement->getAdherent() === $this) {
+                $dysfonctionnement->setAdherent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Transfert>
+     */
+    public function getTransfertsEmetteur(): Collection
+    {
+        return $this->transfertsEmetteur;
+    }
+
+    public function addTransfertsEmetteur(Transfert $transfertsEmetteur): self
+    {
+        if (!$this->transfertsEmetteur->contains($transfertsEmetteur)) {
+            $this->transfertsEmetteur[] = $transfertsEmetteur;
+            $transfertsEmetteur->setEmetteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransfertsEmetteur(Transfert $transfertsEmetteur): self
+    {
+        if ($this->transfertsEmetteur->removeElement($transfertsEmetteur)) {
+            // set the owning side to null (unless already changed)
+            if ($transfertsEmetteur->getEmetteur() === $this) {
+                $transfertsEmetteur->setEmetteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Transfert>
+     */
+    public function getTransfertRecepteur(): Collection
+    {
+        return $this->transfertRecepteur;
+    }
+
+    public function addTransfertRecepteur(Transfert $transfertRecepteur): self
+    {
+        if (!$this->transfertRecepteur->contains($transfertRecepteur)) {
+            $this->transfertRecepteur[] = $transfertRecepteur;
+            $transfertRecepteur->setRecepteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransfertRecepteur(Transfert $transfertRecepteur): self
+    {
+        if ($this->transfertRecepteur->removeElement($transfertRecepteur)) {
+            // set the owning side to null (unless already changed)
+            if ($transfertRecepteur->getRecepteur() === $this) {
+                $transfertRecepteur->setRecepteur(null);
             }
         }
 

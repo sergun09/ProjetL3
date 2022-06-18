@@ -82,10 +82,18 @@ class Materiel
     #[ORM\JoinColumn(nullable: true)]
     private $reparation;
 
+    #[ORM\OneToMany(mappedBy: 'materiel', targetEntity: Dysfonctionnement::class, orphanRemoval: true)]
+    private $dysfonctionnements;
+
+    #[ORM\OneToMany(mappedBy: 'materiel', targetEntity: Transfert::class)]
+    private $transferts;
+
     public function __construct()
     {
         $this->emprunts = new ArrayCollection();
         $this->reparation = new ArrayCollection();
+        $this->dysfonctionnements = new ArrayCollection();
+        $this->transferts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -267,6 +275,66 @@ class Materiel
             // set the owning side to null (unless already changed)
             if ($reparation->getMateriel() === $this) {
                 $reparation->setMateriel(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Dysfonctionnement>
+     */
+    public function getDysfonctionnements(): Collection
+    {
+        return $this->dysfonctionnements;
+    }
+
+    public function addDysfonctionnement(Dysfonctionnement $dysfonctionnement): self
+    {
+        if (!$this->dysfonctionnements->contains($dysfonctionnement)) {
+            $this->dysfonctionnements[] = $dysfonctionnement;
+            $dysfonctionnement->setMateriel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDysfonctionnement(Dysfonctionnement $dysfonctionnement): self
+    {
+        if ($this->dysfonctionnements->removeElement($dysfonctionnement)) {
+            // set the owning side to null (unless already changed)
+            if ($dysfonctionnement->getMateriel() === $this) {
+                $dysfonctionnement->setMateriel(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Transfert>
+     */
+    public function getTransferts(): Collection
+    {
+        return $this->transferts;
+    }
+
+    public function addTransfert(Transfert $transfert): self
+    {
+        if (!$this->transferts->contains($transfert)) {
+            $this->transferts[] = $transfert;
+            $transfert->setMateriel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransfert(Transfert $transfert): self
+    {
+        if ($this->transferts->removeElement($transfert)) {
+            // set the owning side to null (unless already changed)
+            if ($transfert->getMateriel() === $this) {
+                $transfert->setMateriel(null);
             }
         }
 
