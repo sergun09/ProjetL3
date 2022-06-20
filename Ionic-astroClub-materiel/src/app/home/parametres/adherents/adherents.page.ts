@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, IonItemSliding, LoadingController } from '@ionic/angular';
 import { User } from 'src/entity/User';
 import { AdherentsService } from 'src/services/adherents.service';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 @Component({
   selector: 'app-adherents',
@@ -25,6 +26,31 @@ export class AdherentsPage implements OnInit {
     //   this.ready = true;
     // });
 
+  }
+
+  export() : void
+  {
+    if(this.ready == true)
+    {
+      var options = { 
+        fieldSeparator: ' ',
+        quoteStrings: "",
+        decimalseparator: '.',
+        showLabels: false, 
+        showTitle: false,
+        title: '',
+        useBom: true,
+        noDownload: false,
+        headers: []
+      };
+      let b = new ngxCsv(this.adherents.map(adh => adh.nom), "Liste des adhérents", options);
+      //console.log(b.getCsv().replace('"',''))
+    }
+    else
+    {
+      alert("Attendez que la liste des adhérents soit chargée !")
+    }
+   
   }
   ionViewWillEnter() {
     this.adherentService.getAllUsers().subscribe((response) => {
