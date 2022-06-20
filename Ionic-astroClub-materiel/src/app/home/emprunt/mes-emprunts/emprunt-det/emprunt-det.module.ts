@@ -18,6 +18,6 @@ import { DisfonctionnementComponent } from './disfonctionnement/disfonctionnemen
     EmpruntDetPageRoutingModule
   ],
   declarations: [EmpruntDetPage, DescriptionComponent,  DisfonctionnementComponent],
-  entryComponents:[DescriptionComponent]
+  entryComponents:[DescriptionComponent,  DisfonctionnementComponent]
 })
 export class EmpruntDetPageModule {}

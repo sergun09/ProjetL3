@@ -10,6 +10,7 @@ import { EmpruntService } from 'src/services/emprunt.service';
 import { InventairesService } from 'src/services/inventaires.service';
 import { EmpruntGestionnaireComponent } from './emprunt-gestionnaire/emprunt-gestionnaire.component';
 import { EmpruntMotifComponent } from './emprunt-motif/emprunt-motif.component';
+import { ReserverGestionnaireComponent } from './reserver-gestionnaire/reserver-gestionnaire.component';
 import { ReserverMatComponent } from './reserver-mat/reserver-mat.component';
 
 @Component({
@@ -177,17 +178,18 @@ export class MatDetailPage implements OnInit {
       this.empruntService.getEmpruntsByMat('/api/materiels/'+((this.inventaire.id).toString())).subscribe(response => {
         this.emprunts = response;
         if (this.user.roles[0] === 'ROLE_USER'){
-          if (this.emprunts.length === 0) {
             loadingEl.dismiss();
             this.modalCtrl.create({component: ReserverMatComponent, componentProps : {selectedMat: this.inventaire.id}}).then(modalEl => {
             modalEl.present();
            })
-         }
         }else{
-
-        }
+          loadingEl.dismiss();
+          this.modalCtrl.create({component: ReserverGestionnaireComponent, componentProps : {selectedMat: this.inventaire.id}}).then(modalEl => {
+          modalEl.present();
       })
+     }
     })
-  }
+  })
 
+ }
 }

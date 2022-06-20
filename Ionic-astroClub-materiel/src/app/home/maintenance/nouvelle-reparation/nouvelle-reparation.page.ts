@@ -50,7 +50,6 @@ export class NouvelleReparationPage implements OnInit {
     this.loadingCrtl.create({keyboardClose : true , message : 'Veuillez patienter...'}).then(loadingEl => {
       loadingEl.present();
       this.reparationService.createReparation(this.newRep).subscribe(() => {
-        this.inventaireService.modifierInventaireEnMaintenance(form.value.materiel,true).subscribe();
         loadingEl.dismiss();
         this.navCtrl.navigateBack('/home/maintenance');
       });

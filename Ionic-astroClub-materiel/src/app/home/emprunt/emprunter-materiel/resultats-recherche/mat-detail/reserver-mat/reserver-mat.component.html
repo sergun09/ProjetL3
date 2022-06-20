@@ -15,19 +15,21 @@
           <ion-card-content>
             <form [formGroup]="form" >
               <ion-item>
-                <ion-label position="floating">Date de début</ion-label>
-                <ion-datetime  formControlName="dateDebut"></ion-datetime>
+                <ion-datetime [min]="todayToFormat" [max]="dateToFormat"  formControlName="dateDebut">
+                  <div slot="title"> <strong>Date de Début</strong> </div>
+                </ion-datetime>
               </ion-item>
               <ion-item>
-                <ion-label position="floating">Date de fin</ion-label>
-                <ion-datetime   formControlName="dateFin"></ion-datetime>
+                <ion-datetime [min]="todayToFormat" [max]="dateToFormat" formControlName="dateFin">
+                  <div slot="title"><strong>Date de Fin</strong> </div>
+                </ion-datetime>
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Motif</ion-label>
                 <ion-input type="text"  formControlName="motif"></ion-input>
               </ion-item>
               <hr>
-              <ion-button type="submit" color="primary" expand="block" class="ion-marging-top">Valider</ion-button>
+              <ion-button (click)="onSubmitRep()" type="submit" color="primary" expand="block" class="ion-marging-top">Valider</ion-button>
               <ion-button type="reset" color="primary" expand="block">Réinitialiser</ion-button>
             </form>
           </ion-card-content>

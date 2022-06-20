@@ -9,7 +9,7 @@ export class Inventaire {
   conditionnement: string;
   etat: string;
   emprunt: string;
-  montant_caution: number;
+  montantCaution: number;
   commentaire: string;
-  en_maintenance: boolean;
+  enMaintenance: boolean;
 }

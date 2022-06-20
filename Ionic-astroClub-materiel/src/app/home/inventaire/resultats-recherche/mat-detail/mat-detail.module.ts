@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MatDetailPageRoutingModule } from './mat-detail-routing.module';
 
 import { MatDetailPage } from './mat-detail.page';
+import { DisfonctionnementComponent } from './disfonctionnement/disfonctionnement.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { MatDetailPage } from './mat-detail.page';
     IonicModule,
     MatDetailPageRoutingModule
   ],
-  declarations: [MatDetailPage]
+  declarations: [MatDetailPage, DisfonctionnementComponent],
+  entryComponents:[  DisfonctionnementComponent]
 })
 export class MatDetailPageModule {}

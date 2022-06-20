@@ -27,7 +27,7 @@ export class ModifierMaterielPage implements OnInit {
     emprunt: '',
     montantCaution: 0,
     commentaire: '',
-    enMaintenance: this.mat.en_maintenance,
+    enMaintenance: this.mat.enMaintenance,
   };
 
   constructor(

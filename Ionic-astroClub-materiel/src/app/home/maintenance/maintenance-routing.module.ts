@@ -13,9 +13,14 @@ const routes: Routes = [
     loadChildren: () => import('./nouvelle-reparation/nouvelle-reparation.module').then( m => m.NouvelleReparationPageModule)
   },
   {
+    path: 'dysfonctionnement',
+    loadChildren: () => import('./dysfonctionnement/dysfonctionnement.module').then( m => m.DysfonctionnementPageModule)
+  },
+  {
     path: ':reparationId',
     loadChildren: () => import('./reparation-det/reparation-det.module').then( m => m.ReparationDetPageModule)
   }
+
 ];
 
 @NgModule({

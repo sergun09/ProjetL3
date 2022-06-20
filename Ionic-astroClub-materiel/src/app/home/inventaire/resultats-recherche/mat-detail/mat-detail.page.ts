@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ActionSheetController, LoadingController, NavController } from '@ionic/angular';
+import { ActionSheetController, LoadingController, ModalController, NavController } from '@ionic/angular';
 import { Inventaire } from 'src/entity/Inventaire';
 import { InventairesService } from 'src/services/inventaires.service';
+import { DisfonctionnementComponent } from './disfonctionnement/disfonctionnement.component';
 
 @Component({
   selector: 'app-mat-detail',
@@ -17,6 +18,7 @@ export class MatDetailPage implements OnInit {
     private inventaireService: InventairesService,
     private loadingCrtl: LoadingController,
     private route: ActivatedRoute,
+    private modalCtrl: ModalController,
     private navCtrl: NavController) { }
 
   ngOnInit() {
@@ -43,4 +45,11 @@ export class MatDetailPage implements OnInit {
       })
     })
   }
+
+  onDisfct(){
+    this.modalCtrl.create({component: DisfonctionnementComponent}).then(modalEl => {
+      modalEl.present();
+    })
+  }
+
 }

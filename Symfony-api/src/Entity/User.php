@@ -22,7 +22,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:collection','read:emprunt'])]
+    #[Groups(['read:collection','read:emprunt', 'read:dysfonctionnement'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection', 'write','read:emprunt'])]
+    #[Groups(['read:collection', 'write','read:emprunt', 'read:dysfonctionnement'])]
     private $nom;
 
     #[ORM\OneToMany(mappedBy: 'adherent', targetEntity: Emprunt::class)]

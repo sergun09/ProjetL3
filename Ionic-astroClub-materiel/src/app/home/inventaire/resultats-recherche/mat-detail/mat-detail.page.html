@@ -47,8 +47,16 @@
               </ion-item>
           </ion-card-content>
         </ion-card>
-  <ion-button class="ion-marging-top" expand="block" routerLink="">Signaler un disfonctionnement</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="8" offset-md="4">
+        <ion-button class="ion-marging-top" expand="block" (click)="onDisfct()">Signaler un disfonctionnement</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

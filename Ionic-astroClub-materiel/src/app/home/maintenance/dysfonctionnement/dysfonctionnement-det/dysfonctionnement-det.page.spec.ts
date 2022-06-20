@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MatDetailPage } from './mat-detail.page';
+import { DysfonctionnementDetPage } from './dysfonctionnement-det.page';
 
-describe('MatDetailPage', () => {
-  let component: MatDetailPage;
-  let fixture: ComponentFixture<MatDetailPage>;
+describe('DysfonctionnementDetPage', () => {
+  let component: DysfonctionnementDetPage;
+  let fixture: ComponentFixture<DysfonctionnementDetPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MatDetailPage ],
+      declarations: [ DysfonctionnementDetPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MatDetailPage);
+    fixture = TestBed.createComponent(DysfonctionnementDetPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

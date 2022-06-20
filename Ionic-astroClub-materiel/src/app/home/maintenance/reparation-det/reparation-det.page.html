@@ -27,8 +27,16 @@
               </ion-item>
           </ion-card-content>
         </ion-card>
-  <ion-button class="ion-marging-top" expand="block" routerLink="">Maintenance</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="8" offset-md="4">
+        <ion-button class="ion-marging-top" expand="block" (click)="onChangeEtat()">Maintenance</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

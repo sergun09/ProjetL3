@@ -28,15 +28,6 @@ const routes: Routes = [
     }
   },
   {
-    path: 'reservation',
-    loadChildren: () => import('./reservation/reservation.module').then( m => m.ReservationPageModule),
-    canActivate: [HasRoleGuard],
-    data:
-    {
-      role: 'ROLE_USER'
-    }
-  },
-  {
     path: 'maintenance',
     loadChildren: () => import('./maintenance/maintenance.module').then( m => m.MaintenancePageModule),
     canActivate: [HasRoleGuard],
