@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Dysfonctionnement } from 'src/entity/dysfonctionnement';
+import { DysfonctionnementPost } from 'src/entity/dysfonctionnementPost';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class DysfonctionnementService {
       { observe: 'body', responseType: 'json' })
   }
 
-  public createDysfonctionnement(dysfct: Dysfonctionnement): Observable<boolean> {
+  public createDysfonctionnement(dysfct: DysfonctionnementPost): Observable<boolean> {
     return this.http.post(this.server,
       dysfct,
       {

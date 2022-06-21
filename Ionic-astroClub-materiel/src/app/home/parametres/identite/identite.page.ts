@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { User } from 'src/entity/User';
 import { UserLogin } from 'src/entity/UserLogin';
 import { AuthService } from 'src/services/auth.service';
@@ -24,7 +24,7 @@ export class IdentitePage implements OnInit {
       nom: "",
       roles: new Array()
     }
-  constructor(private authService: AuthService, private loadingCrtl: LoadingController) { }
+  constructor(private authService: AuthService, private loadingCrtl: LoadingController,private alertCtrl: AlertController) { }
 
   ngOnInit() {
   }
@@ -38,7 +38,13 @@ export class IdentitePage implements OnInit {
         this.authService.loginUser(this.userLogin).subscribe(() => {
           this.authService.getUser().subscribe((u) => {
             this.user = u;
-            alert("User recupéré")
+            this.alertCtrl.create({
+              header: 'Attention !!!',
+              message: "User recupéré ",
+              buttons: ['OK']
+            }).then(alertEl => {
+                alertEl.present();
+              })
             localStorage.setItem("user", JSON.stringify(this.user))
             console.log(JSON.parse(localStorage.getItem("user")) as User);
             var m = JSON.parse(localStorage.getItem("user")) as User
@@ -55,7 +61,13 @@ export class IdentitePage implements OnInit {
       });
     }
     else {
-      alert("Vous êtes déjà connecté !")
+      this.alertCtrl.create({
+        header: 'Attention !!!',
+        message: "Vous êtes déjà connecté ! ",
+        buttons: ['OK']
+      }).then(alertEl => {
+          alertEl.present();
+        })
     }
   }
 }

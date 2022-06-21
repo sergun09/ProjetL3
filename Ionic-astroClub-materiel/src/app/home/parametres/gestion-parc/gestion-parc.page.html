@@ -17,7 +17,13 @@
         </ion-card-header>
         <ion-card-content>
           <ion-list *ngIf="ready">
-            <ion-item-sliding *ngFor="let inventaire of inventaires" #slidingInv >
+            <ion-searchbar
+            placeholder="Chercher"
+            [(ngModel)]="searchTerm"
+            showCancelButton="focus"
+            animated
+            ></ion-searchbar>
+            <ion-item-sliding *ngFor="let inventaire of inventaires | filter:searchTerm" #slidingInv >
               <ion-item>
                 {{inventaire.intitule}}
               </ion-item>

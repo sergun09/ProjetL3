@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
+import { ActionSheetController, LoadingController, NavController } from '@ionic/angular';
 import { Dysfonctionnement } from 'src/entity/dysfonctionnement';
+import { ReparationPost } from 'src/entity/reparationPost';
 import { DysfonctionnementService } from 'src/services/dysfonctionnement.service';
+import { ReparationService } from 'src/services/reparation.service';
 
 @Component({
   selector: 'app-dysfonctionnement-det',
@@ -13,13 +15,20 @@ export class DysfonctionnementDetPage implements OnInit {
 
   dysfonctionnement : Dysfonctionnement= new Dysfonctionnement();
   date:string;
+  newRep : ReparationPost = {
+    nom: '',
+    description: '',
+    materiel: '',
+  };
 
   constructor(
     private loadingCrtl:LoadingController,
     private route: ActivatedRoute,
     private navCtrl:NavController,
-    private dysfonctionnementService: DysfonctionnementService
-  ) { }
+    private dysfonctionnementService: DysfonctionnementService,
+    private actionSheetCrtl :ActionSheetController,
+    private reparationService: ReparationService
+      ) { }
 
   ngOnInit() {
   }
@@ -38,6 +47,47 @@ export class DysfonctionnementDetPage implements OnInit {
         loadingEl.dismiss();
       })
       })
+    })
+  }
+
+  onDelete(id : number){
+    this.actionSheetCrtl.create({
+      header: 'ETES-VOUS SUR DE VOULOIR ANNULER LE SIGNALEMENT ?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.loadingCrtl.create({ keyboardClose: true, message: 'Veuillez patienter...' }).then(loadingEl => {
+              loadingEl.present();
+              this.dysfonctionnementService.deleteDysfonctionnementFromId(id).subscribe(() => {
+                loadingEl.dismiss();
+                this.navCtrl.navigateBack('/home/maintenance/dysfonctionnement');
+              })
+            })
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    }).then(actionSheetEl => {
+      actionSheetEl.present();
+    });
+  }
+
+  onValide(){
+    this.newRep.materiel= '/api/materiels/'+(this.dysfonctionnement.materiel?.id).toString();
+    this.newRep.nom= 'Reparation du materiel '+(this.dysfonctionnement.materiel?.intitule).toString();
+    this.newRep.description= this.dysfonctionnement.description;
+    this.loadingCrtl.create({ keyboardClose: true, message: 'Veuillez patienter...' }).then(loadingEl => {
+      loadingEl.present();
+      this.reparationService.createReparation(this.newRep).subscribe(() => {
+        this.dysfonctionnementService.deleteDysfonctionnementFromId(this.dysfonctionnement.id).subscribe(() => {
+          loadingEl.dismiss();
+          this.navCtrl.navigateBack('/home/maintenance/dysfonctionnement');
+        })
+      });
     })
   }
 

@@ -12,6 +12,7 @@ export class GestionParcPage implements OnInit {
 
   inventaires: Array<Inventaire> = new Array()
   ready : boolean;
+  searchTerm : string;
 
   constructor(private inventaireService: InventairesService,
     private actionSheetCtrl: ActionSheetController,

@@ -42,10 +42,10 @@
         <ion-grid>
           <ion-row>
             <ion-col size-md="4" offset-md="1">
-              <ion-button expand="block" class="ion-marging-top">Valider</ion-button>
+              <ion-button expand="block" (click)="onValide()" class="ion-marging-top">Valider</ion-button>
             </ion-col>
             <ion-col size-md="4" offset-md="1">
-              <ion-button expand="block" color="danger" class="ion-marging-top">Annuler</ion-button>
+              <ion-button expand="block" color="danger" (click)="onDelete(dysfonctionnement.id)" class="ion-marging-top">Annuler</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>

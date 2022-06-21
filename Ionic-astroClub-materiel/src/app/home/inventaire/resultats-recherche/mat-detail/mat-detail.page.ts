@@ -47,7 +47,7 @@ export class MatDetailPage implements OnInit {
   }
 
   onDisfct(){
-    this.modalCtrl.create({component: DisfonctionnementComponent}).then(modalEl => {
+    this.modalCtrl.create({component: DisfonctionnementComponent,componentProps : {selectedMat : this.inventaire.id}}).then(modalEl => {
       modalEl.present();
     })
   }

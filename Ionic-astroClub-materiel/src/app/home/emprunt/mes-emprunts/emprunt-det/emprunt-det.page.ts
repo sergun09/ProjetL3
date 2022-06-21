@@ -56,7 +56,7 @@ this.modalCtrl.create({component: DescriptionComponent,componentProps : {selecte
   }
 
   onDisfct(){
-    this.modalCtrl.create({component: DisfonctionnementComponent}).then(modalEl => {
+    this.modalCtrl.create({component: DisfonctionnementComponent,componentProps : {selectedMat : this.emprunt.materiel?.id}}).then(modalEl => {
       modalEl.present();
     })
   }
