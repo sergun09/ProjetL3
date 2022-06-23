@@ -16,9 +16,7 @@
       <ion-button class="ion-marging-top" expand="block" (click)="export()">
         <ion-icon slot="start" name="download-outline"></ion-icon>Exporter
       </ion-button>
-      <ion-button class="ion-marging-top" expand="block">
-        <ion-icon slot="start" name="cloud-upload-outline"></ion-icon> Importer
-      </ion-button>
+      <input type="file" #fileImportInput name="fileUpload" (change)="fileChangeListener($event)" accept=".csv"/>
       <ion-card>
         <ion-card-header>
           <ion-card-title><strong>Les Adhérents :</strong></ion-card-title>
