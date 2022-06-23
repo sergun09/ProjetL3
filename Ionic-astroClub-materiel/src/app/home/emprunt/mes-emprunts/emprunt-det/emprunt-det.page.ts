@@ -5,6 +5,7 @@ import { Emprunt } from 'src/entity/emprunt';
 import { EmpruntService } from 'src/services/emprunt.service';
 import { DescriptionComponent } from './description/description.component';
 import { DisfonctionnementComponent } from './disfonctionnement/disfonctionnement.component';
+import { TransfertComponent } from './transfert/transfert.component';
 
 
 @Component({
@@ -57,6 +58,16 @@ this.modalCtrl.create({component: DescriptionComponent,componentProps : {selecte
 
   onDisfct(){
     this.modalCtrl.create({component: DisfonctionnementComponent,componentProps : {selectedMat : this.emprunt.materiel?.id}}).then(modalEl => {
+      modalEl.present();
+    })
+  }
+
+  onTransfert(){
+    this.modalCtrl.create({component: TransfertComponent,
+      breakpoints: [0, 0.25, 0.5, 0.75],
+      initialBreakpoint: 0.5,
+      componentProps : {selectedMat : this.emprunt.materiel?.id},
+      }).then(modalEl => {
       modalEl.present();
     })
   }

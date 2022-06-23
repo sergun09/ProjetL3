@@ -8,4 +8,6 @@ export class Emprunt {
   motif: string;
   adherent: User;
   materiel: Inventaire;
+  adhRecep : string;
+  idTrans: number;
 }
