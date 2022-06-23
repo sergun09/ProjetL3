@@ -39,8 +39,8 @@ export class IdentitePage implements OnInit {
           this.authService.getUser().subscribe((u) => {
             this.user = u;
             this.alertCtrl.create({
-              header: 'Attention !!!',
-              message: "User recupéré ",
+              header: 'Connexion réussie !',
+              message: "Vous êtes connecté ! ",
               buttons: ['OK']
             }).then(alertEl => {
                 alertEl.present();
@@ -69,5 +69,10 @@ export class IdentitePage implements OnInit {
           alertEl.present();
         })
     }
+  }
+
+  logout() : void
+  {
+    localStorage.removeItem("user")
   }
 }

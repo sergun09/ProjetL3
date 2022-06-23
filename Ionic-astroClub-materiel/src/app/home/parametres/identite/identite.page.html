@@ -46,6 +46,12 @@
             </form>
           </ion-card-content>
         </ion-card>
+        <ion-text *ngIf="user.id != 0">
+          <h3>Connecté en tant que {{ user.nom}}</h3>
+        </ion-text>
+        <ion-button *ngIf="user.id != 0" color="danger" fill="clear" expand="block" (click)="logout()">
+          Deconnexion
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
