@@ -29,6 +29,11 @@ export class IdentitePage implements OnInit {
   ngOnInit() {
   }
 
+  public IsLogin() : boolean
+  {
+    return localStorage.length != 0; 
+  }
+
   login(uuid: string) {
     if (localStorage.getItem("user") == null) {
       this.userLogin.uuid = uuid;
