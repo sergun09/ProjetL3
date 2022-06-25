@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { User } from 'src/entity/User';
 import { UserLogin } from 'src/entity/UserLogin';
 import { AuthService } from 'src/services/auth.service';
@@ -24,14 +24,19 @@ export class IdentitePage implements OnInit {
       nom: "",
       roles: new Array()
     }
-  constructor(private authService: AuthService, private loadingCrtl: LoadingController,private alertCtrl: AlertController) { }
+    userConnecte : User;
+  constructor(private authService: AuthService,
+    private loadingCrtl: LoadingController,
+    private alertCtrl: AlertController,
+    private navCtrl : NavController
+    ) { }
 
   ngOnInit() {
   }
 
   public IsLogin() : boolean
   {
-    return localStorage.length != 0; 
+    return localStorage.length != 0;
   }
 
   login(uuid: string) {
@@ -55,7 +60,7 @@ export class IdentitePage implements OnInit {
             var m = JSON.parse(localStorage.getItem("user")) as User
             console.log("User log : " + m.nom);
             console.log("User log : " + m.roles);
-
+            this.navCtrl.navigateBack('/home');
             loadingEl.dismiss();
           }, (error) => console.log(error))
         },
@@ -74,6 +79,9 @@ export class IdentitePage implements OnInit {
           alertEl.present();
         })
     }
+  }
+  ionViewWillEnter(){
+    this.userConnecte = this.authService.getUserSession();
   }
 
   logout() : void

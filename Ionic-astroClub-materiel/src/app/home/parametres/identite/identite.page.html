@@ -47,7 +47,7 @@
           </ion-card-content>
         </ion-card>
         <ion-text *ngIf="IsLogin()">
-          <h3>Connecté en tant que {{ user.nom}}</h3>
+          <h3>Connecté en tant que {{ userConnecte?.nom }}</h3>
         </ion-text>
         <ion-button *ngIf="IsLogin()" color="danger" fill="clear" expand="block" (click)="logout()">
           Deconnexion

@@ -12,8 +12,17 @@
     <ion-row>
       <ion-col size-md="6" offset-md="3">
         <ion-list>
+          <h3>Listes des Emprunts</h3>
           <ion-item *ngFor="let emprunt of emprunts" [routerLink]="['/','home','emprunt','emprunts-tiers',emprunt.id]" detail>
             <ion-label> {{emprunt.materiel?.intitule}} </ion-label>
+          </ion-item>
+          <hr>
+          <h3>Listes des Transferts</h3>
+          <ion-item *ngFor="let trans of transEmett" >
+            <ion-label>{{trans.materiel?.intitule}} : de {{ trans.emetteur?.nom }} -> {{trans.recepteur?.nom}}
+            </ion-label>
+            <ion-button color="danger" (click)="onCancel(trans.id)">Annuler</ion-button>
+            <ion-button  (click)="onValider(trans.id)">Valider</ion-button>
           </ion-item>
         </ion-list>
       </ion-col>
