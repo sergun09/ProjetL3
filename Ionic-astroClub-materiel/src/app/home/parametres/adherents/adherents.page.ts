@@ -82,11 +82,11 @@ export class AdherentsPage implements OnInit {
     if(this.ready == true)
     {
       var options = { 
-        fieldSeparator: ' ',
+        fieldSeparator: ',',
         quoteStrings: "",
         decimalseparator: '.',
         showLabels: false, 
-        showTitle: false,
+        showTitle: true,
         title: '',
         useBom: true,
         noDownload: false,
