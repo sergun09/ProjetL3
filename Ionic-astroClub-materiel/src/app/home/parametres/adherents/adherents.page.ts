@@ -39,16 +39,16 @@ export class AdherentsPage implements OnInit {
   {
     const files = $event.srcElement.files;
 
-    this.loadingCrtl.create({ keyboardClose: true, message: 'Importation en cours...' }).then(loadingEl => 
+    this.loadingCrtl.create({ keyboardClose: true, message: 'Importation en cours...' }).then(loadingEl =>
       {
         loadingEl.present();
         this.ngxCsvParser.parse(files[0], { header: true, delimiter: ',' })
           .pipe().subscribe({
             next: (result): void => {
               //let s = result[0] as String[]
-              for(var n of result[0] as string[]) 
-              { 
-                //console.log(n) 
+              for(var n of result[0] as string[])
+              {
+                //console.log(n)
                 console.log("Fichier à lire : ", result)
                 console.log('Creation User');
                 const userN:  UserPost =
@@ -63,7 +63,7 @@ export class AdherentsPage implements OnInit {
                 userN.uuid = uuid.toString();
                 userN.password = uuid.toString();
                 userN.roles = ["ROLE_USER"]
-                this.adherentService.createUser(userN).subscribe(() => 
+                this.adherentService.createUser(userN).subscribe(() =>
                 {
                   console.log("Creation User terminée")
                   loadingEl.dismiss();
@@ -81,11 +81,11 @@ export class AdherentsPage implements OnInit {
   {
     if(this.ready == true)
     {
-      var options = { 
-        fieldSeparator: ',',
+      var options = {
+        fieldSeparator: ' ',
         quoteStrings: "",
         decimalseparator: '.',
-        showLabels: false, 
+        showLabels: false,
         showTitle: true,
         title: '',
         useBom: true,
@@ -99,7 +99,7 @@ export class AdherentsPage implements OnInit {
     {
       alert("Attendez que la liste des adhérents soit chargée !")
     }
-   
+
   }
   ionViewWillEnter() {
     this.adherentService.getAllUsers().subscribe((response) => {

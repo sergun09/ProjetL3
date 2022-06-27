@@ -36,19 +36,19 @@ export class GestionParcPage implements OnInit {
   {
     if(this.ready)
     {
-      var options = { 
+      var options = {
         fieldSeparator: ',',
         quoteStrings: "",
         decimalseparator: '.',
-        showLabels: true, 
+        showLabels: true,
         showTitle: true,
         title: '',
         useBom: true,
         noDownload: false,
         headers: []
       };
-      // let s = this.inventaires.map(mat => 
-        
+      // let s = this.inventaires.map(mat =>
+
       //     new InventaireExport(mat.typeMateriel.nom, mat.intitule, mat.description, mat.kit, mat.conditionnement, mat.etat,
       //       mat.emprunt, mat.montantCaution, mat.commentaire, mat.enMaintenance)
       //   );
@@ -58,7 +58,7 @@ export class GestionParcPage implements OnInit {
           const id = Number(String(mat.typeMateriel).split("/")[3])
           this.typeMatService.getOneTypeMat(id).subscribe(typeMat => this.typeMateriel = typeMat)
           console.log(this.typeMateriel)
-          return new InventaireExport(this.typeMateriel.nom, mat.intitule, mat.description, mat.kit, mat.conditionnement, mat.etat,
+          return new InventaireExport(this.typeMateriel?.nom, mat.intitule, mat.description, mat.kit, mat.conditionnement, mat.etat,
           mat.emprunt, mat.montantCaution, mat.commentaire, mat.enMaintenance)
         }
       )

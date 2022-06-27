@@ -14,7 +14,7 @@
       <ion-button class="ion-marging-top" expand="block" (click)="export()">
         <ion-icon slot="start" name="download-outline"></ion-icon>Exporter
       </ion-button>
-      <input type="file" #fileImportInput name="fileUpload" (change)="fileChangeListener($event)" accept=".csv"/>
+      <ion-input type="file" #fileImportInput name="fileUpload" (change)="fileChangeListener($event)" accept=".csv"></ion-input>
       <ion-card>
         <ion-card-header>
           <ion-card-title><strong>Matériels :</strong></ion-card-title>
@@ -29,7 +29,7 @@
             ></ion-searchbar>
             <ion-item-sliding *ngFor="let inventaire of inventaires | filter:searchTerm" #slidingInv >
               <ion-item>
-                {{inventaire.intitule}} | {{inventaire.kit}} | {{inventaire.typeMateriel.nom}}
+                {{inventaire.intitule}}
               </ion-item>
               <ion-item-options side="end">
                 <ion-item-option color="danger" (click)="onDeleteMat(inventaire.id,slidingInv)">
