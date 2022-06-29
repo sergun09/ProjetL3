@@ -23,7 +23,7 @@ class DoctrineSubscriber implements EventSubscriberInterface
         $entity = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if ($entity instanceof User && $method == Request::METHOD_POST) {
+        if ($entity instanceof User && ($method == Request::METHOD_POST || $method == Request::METHOD_PATCH)) {
             $entity->setPassword($this->passwordInterface->hashPassword($entity, $entity->getPassword()));
         }
     }

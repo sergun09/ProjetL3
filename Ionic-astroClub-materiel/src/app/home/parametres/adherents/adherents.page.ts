@@ -82,15 +82,15 @@ export class AdherentsPage implements OnInit {
     if(this.ready == true)
     {
       var options = {
-        fieldSeparator: ' ',
+        fieldSeparator: ',',
         quoteStrings: "",
         decimalseparator: '.',
-        showLabels: false,
+        showLabels: true,
         showTitle: true,
         title: '',
         useBom: true,
         noDownload: false,
-        headers: []
+        headers: ["Nom"]
       };
       let b = new ngxCsv(this.adherents.map(adh => adh.nom), "Liste des adhérents", options);
       //console.log(b.getCsv().replace('"',''))
