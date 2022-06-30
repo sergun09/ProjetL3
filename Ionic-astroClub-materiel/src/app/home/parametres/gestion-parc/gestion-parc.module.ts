@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { GestionParcPageRoutingModule } from './gestion-parc-routing.module';
 
 import { GestionParcPage } from './gestion-parc.page';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';;
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FormsModule,
     IonicModule,
     GestionParcPageRoutingModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    TranslateModule
   ],
   declarations: [GestionParcPage]
 })
