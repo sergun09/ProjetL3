@@ -10,8 +10,8 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-      <ion-button class="ion-marging-top" expand="block" routerLink="/home/maintenance/nouvelle-reparation"><ion-icon slot="start" name="add-outline"></ion-icon>Ajouter</ion-button>
-      <ion-button class="ion-marging-top" expand="block" routerLink="/home/maintenance/dysfonctionnement">Signalement</ion-button>
+      <ion-button class="ion-marging-top" expand="block" routerLink="/home/maintenance/nouvelle-reparation"><ion-icon slot="start" name="add-outline"></ion-icon>{{'MAINTENANCE.ajouter' | translate }} </ion-button>
+      <ion-button class="ion-marging-top" expand="block" routerLink="/home/maintenance/dysfonctionnement">{{'MAINTENANCE.dys' | translate }}</ion-button>
       <ion-card>
         <ion-card-content *ngIf="ready">
           <ion-list >
@@ -24,7 +24,7 @@
              <ion-grid>
               <ion-row>
                 <ion-col size-sm="2" offset-sm="5">
-                  <h5 >Loading...</h5>
+                  <h5 >{{'MAINTENANCE.loading' | translate }}...</h5>
                   <ion-spinner color="primary"></ion-spinner>
                 </ion-col>
               </ion-row>

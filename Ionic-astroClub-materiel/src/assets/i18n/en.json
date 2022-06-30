@@ -1,0 +1,269 @@
+{
+  "ALL":{
+    "retour": "Back",
+    "erreur": "An error has occurred.",
+    "modifier": "Modify",
+    "supprimer": "Delete",
+    "annuler": "Cancel",
+    "termine": "completed",
+    "reorganiser": "Reorganize"
+  },
+
+  "HOME": {
+    "bienvenue": "Bienvenue sur AstroClub ",
+    "inventaire": "Inventaire ",
+    "emprunt": "Réserver / Emprunter ",
+    "maintenance": "Maintenance",
+    "parametres": "Parametres "
+  },
+
+  "EMPRUNT": {
+    "menu":  "Menu ",
+    "emprunter": "Emprunter ",
+    "mes_emprunts": "Mes Emprunts ",
+    "tiers": "Emprunts Tiers "
+  },
+
+  "PARAMETRE": {
+    "identite":  "Identité",
+    "adherents": "Adherents ",
+    "gestion": "Gestion Parc ",
+    "bouttonValide": "Validate"
+  },
+
+  "MAINTENANCE": {
+    "loading":  "Chargement ...",
+    "ajouter": "Ajouter ",
+    "dys": "Dysfonctionnement "
+  },
+
+  "INVENTAIRE": {
+    "ok":  "Confirmer ",
+    "ko": "Annuler ",
+    "type": "Type ",
+    "intitule": "Intitulé ",
+    "etat": "Etat ",
+    "emprunt": "Emprunt ",
+    "reini": "Réinitialiser ",
+    "rechercher": "Lancer la Recherche "
+  },
+
+  "ADHERENTS": {
+    "ajouter":  "Ajouter ",
+    "export": "Exporter ",
+    "adherents": "Liste des Adhérents ",
+    "materiels": "Liste des Matériels ",
+    "AucunAtelier": "No workshop.",
+    "creerAtel": "Create a workshop",
+    "nomAtel": "Workshop name:",
+    "nom": "Name",
+    "annuler": "Cancel",
+    "creer": "Create !",
+    "popUpAtelierCreer": "The workshop has been created.",
+    "termine": "completed",
+    "ordreAtel": "The order has been changed.",
+    "modifier": "Modify",
+    "supprimer": "Delete",
+    "atelierSupp": "The workshop has been abolished.",
+    "chargementAtelier": "Workshop loading..."
+  },
+
+  "CRUDCOMPETENCES": {
+    "title":  "Skills management",
+    "ajouterCompetence": "Add a skill",
+    "nom": "Name",
+    "valeur": "Value : ",
+    "ajoutervaleur": "Add value",
+    "sauvegarder": "Save",
+    "valeurCompetence": "Competency Values",
+    "reorganiser": "Reorganize",
+    "cacherCompetence": "Hide all skills",
+    "competence": "Skills",
+    "aucuneCompetence": "No skill.",
+    "saisirNom": "Enter name",
+    "saisirValeur": "Enter value",
+    "chargementComp": "Loading skills...",
+    "PopUpSupressionVal": "The value has been deleted.",
+    "affComp": "View all skills",
+    "CacherComp": "Hide all skills",
+    "suppComp": "The skill has been removed",
+    "ordreModif": "The order has been changed.",
+    "ajoutvaleur": "Value has been added.",
+    "erreurvaleur": "Empty value name ! Please enter a non-existent and non-empty value.",
+    "creerComp": "Skill has been created",
+    "erreurvalideComp": "Please add at least one value.",
+    "erreurNomComp": "Please name the skill."
+  },
+
+  "CRUDSTAGIAIRES": {
+    "title":  "Trainee management",
+    "ajouterStagiaire": "Add a trainee",
+    "AucunStagiaire": "No trainee.",
+    "ajoutStag": "Add a trainee",
+    "nomStag": "Name of the trainee:",
+    "nom": "name",
+    "creerStag": "The trainee has been added.",
+    "suppStag": "The trainee has been deleted.",
+    "chargementStag": "Loading trainees..."
+  },
+
+  "EVALUATION": {
+    "title":  "Évaluation",
+    "routeAtelier": "Workshops",
+    "routeCompetence": "Skills"
+  },
+
+  "GERERPLANIF": {
+    "titleModifPlanif":  "Change of planning",
+    "titleAjoutPlanif":  "New planning",
+    "date": "Date",
+    "heure": "hour",
+    "type": "Type : ",
+    "sortie": "Outlet",
+    "atelier": "Workshop",
+    "animateursTitle": "Animators",
+    "tous": "All",
+    "aucun": "Nothing",
+    "aucunAnimateur": "No animator.",
+    "stagiaireTitle": "Trainees.",
+    "aucunStagiaire": "No Trainee.",
+    "modifPlanif": "Change the schedule",
+    "creerPlanif": "Create planning",
+    "planifcreer": "Planning created.",
+    "chargementMembre": "Loading members...",
+    "typePlanif": "Please choose the type of planning.",
+    "datePlanif": "Please select a day and time for scheduling.",
+    "modifEnregistree": "Saved changes."
+
+  },
+
+  "IDENTITE": {
+    "title":  "Identities",
+    "cleAcces": "Access key",
+    "coller": "Paste",
+    "connecte": "Connected as  ",
+    "atelierMaitrise": "Mastered Workshops",
+    "deco": "Disconnect",
+    "numCle": "Key number",
+    "connexion": "Connexion...",
+    "bienvenue": "Welcome",
+    "erreurInformations": "Wrong information.",
+    "deconnexion": "You have been disconnected."
+
+  },
+
+  "MODIFANIMATEUR": {
+    "title":  "Modify an animator",
+    "nomAnimateur": "Animator's name",
+    "valider": "Validate",
+    "newCle": "Generate new key",
+    "cléGenere": "Security key generated: ",
+    "copier": "Copy",
+    "chargementAnimateur": "Animator loading...",
+    "modifAnim": "The animator has been changed.",
+    "newCleGen": "A new key has been generated."
+  },
+
+  "MODIFATELIER": {
+    "title":  "Modify a workshop",
+    "nomAtelier": "Workshop's name",
+    "valider": "Validate",
+    "chargementAtelier": "Workshop's loading...",
+    "modifAtelier": "The workshop has been changed"
+  },
+
+  "MODIFCOMPETENCE": {
+    "title":  "Modify a Workshop",
+    "nom": "Name : ",
+    "modifierNom": "Modify Name",
+    "choixValeur": "Choose a value : ",
+    "valeur": "Value : ",
+    "modifier": "Modify",
+    "supprimer": "Delete",
+    "ajouterValeur": "Add a value",
+    "choisirValeur": "Choose a value",
+    "chargementComp": "Skill loading...",
+    "modifComp": "The skill has been modified",
+    "NomVide": "Empty skill name",
+    "NonChange": "you have not changed your name",
+    "NomDifferent": "Choose a name different from those already present in the skill",
+    "ChoixValeur": "Please select a value to modify",
+    "ChoixSuppValeur": "Choose a value to delete",
+    "SuppValeur": "The value has been deleted",
+    "ValeurDiff": "please enter a value different from the one already present in the skills and please enter a non-empty value"
+  },
+
+  "MODIFSTAGIAIRE": {
+    "title":  "Modify a trainee",
+    "nomStagiaire": "Trainee's name",
+    "valider": "Validate",
+    "chargementStag": "Trainee loading...",
+    "modifStag": "The trainee has been modified."
+  },
+
+  "PARAMETRES": {
+    "title":  "Settings",
+    "identite": "Identity",
+    "stagiaires": "Trainees",
+    "ateliers": "Workshops",
+    "competences": "Skills",
+    "Animateurs": "Animators"
+  },
+
+  "PLANIF": {
+    "title":  "Schedule",
+    "ajoutPlanif": "Add a schedule",
+    "planifTitle": "Schedules",
+    "aucunePlanif": "No schedule.",
+    "atelier": "Workshop",
+    "sortie": "Output",
+    "chargementPlanning": "Loading schedule...",
+    "ModifierPlanif": "Modify the planning",
+    "ModifSortie": "Modify the output",
+    "ModifAtelier": "Modify workshop",
+    "GererParametres": "Manage parameters",
+    "planifSupp": "The planning has been removed."
+  },
+
+  "PLANIF_ATELIER": {
+    "title":  "Workshop scheduling ",
+    "dateTitle": "Workshops of the ",
+    "aucunAtelier": "No workshops.",
+    "animateurs": "Animators",
+    "aucunAnimateur": "No animator available.",
+    "valider": "Validate",
+    "afficher": "View",
+    "chargementInfoPlanif": "Loading information from the workshop planning...",
+    "cacher": "Hide",
+    "seanceEnregistree": "Session recorded.",
+    "cocherCase": "please check at least one box",
+    "modifAtelier": "Workshop modify..."
+  },
+
+  "VISUALISATION": {
+    "title":  "Visualization",
+    "mode": "Mode:",
+    "unStag": "A trainee",
+    "groupe": "Group",
+    "stagiaires": "Trainees",
+    "valider": "Validate",
+    "tous": "All",
+    "aucun": "No",
+    "atelier": "Workshop",
+    "competence": "Skill",
+    "ateliers": "Workshops",
+    "oui": "Yes",
+    "non": "No",
+    "competences": "Skills",
+    "aucuneCompetence": "No skill.",
+    "retour": "back",
+    "choisirAtelier": "Choose a workshop",
+    "choisirCompetence": "Choose a skill",
+    "annuler": "Cancel",
+    "chargementStag": "Loading trainees...",
+    "selecStag": "Please select a trainee.",
+    "selecComp": "Please select a skill.",
+    "selecAtel": "Please select a workshop.",
+    "selectPlusStag": "Please select a trainee(s)."
+  }
+}

@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { InventairePageRoutingModule } from './inventaire-routing.module';
 
 import { InventairePage } from './inventaire.page';
+import {TranslateModule} from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    InventairePageRoutingModule
+    InventairePageRoutingModule,
+    TranslateModule
   ],
   declarations: [InventairePage]
 })

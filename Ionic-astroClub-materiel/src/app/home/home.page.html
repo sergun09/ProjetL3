@@ -13,20 +13,20 @@
           <ion-card>
             <ion-card-header>
               <ion-card-title>
-                <strong *ngIf="user === null">Bienvenue sur AstroClub</strong>
-                <strong *ngIf="user !== null">Bienvenue sur AstroClub {{user?.nom}} </strong>
+                <strong *ngIf="user === null"> {{'HOME.bienvenue' | translate }} </strong>
+                <strong *ngIf="user !== null"> {{'HOME.bienvenue' | translate }}{{user?.nom}} </strong>
               </ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <ion-button expand="block" routerLink="/home/inventaire">Inventaire</ion-button>
+              <ion-button expand="block" routerLink="/home/inventaire">{{'HOME.inventaire' | translate }}</ion-button>
               <br/>
-              <ion-button expand="block" routerLink="/home/emprunt">Emprunt / Réservation</ion-button>
+              <ion-button expand="block" routerLink="/home/emprunt">{{'HOME.emprunt' | translate }}</ion-button>
               <br/>
               <!-- <ion-button expand="block" routerLink="/home/reservation">Réservation</ion-button>
               <br/> -->
-              <ion-button expand="block" routerLink="/home/maintenance">Maintenance</ion-button>
+              <ion-button expand="block" routerLink="/home/maintenance">{{'HOME.maintenance' | translate }}</ion-button>
               <br/>
-              <ion-button expand="block" routerLink="/home/parametres">Paramètres</ion-button>
+              <ion-button expand="block" routerLink="/home/parametres">{{'HOME.parametres' | translate }} </ion-button>
             </ion-card-content>
           </ion-card>
         </ion-col>

@@ -8,13 +8,16 @@ import { MatDetailPageRoutingModule } from './mat-detail-routing.module';
 
 import { MatDetailPage } from './mat-detail.page';
 import { DisfonctionnementComponent } from './disfonctionnement/disfonctionnement.component';
+import {TranslateModule} from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MatDetailPageRoutingModule
+    MatDetailPageRoutingModule,
+    TranslateModule
   ],
   declarations: [MatDetailPage, DisfonctionnementComponent],
   entryComponents:[  DisfonctionnementComponent]

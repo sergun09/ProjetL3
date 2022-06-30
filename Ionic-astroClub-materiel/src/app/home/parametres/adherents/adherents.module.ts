@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { AdherentsPageRoutingModule } from './adherents-routing.module';
 
 import { AdherentsPage } from './adherents.page';
+import {TranslateModule} from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AdherentsPageRoutingModule
+    AdherentsPageRoutingModule,
+    TranslateModule
   ],
   declarations: [AdherentsPage]
 })

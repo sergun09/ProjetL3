@@ -10,14 +10,14 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-      <ion-button class="ion-marging-top" expand="block" routerLink="/home/parametres/gestion-parc/new-materiel"><ion-icon slot="start" name="add-outline"></ion-icon>Ajouter</ion-button>
+      <ion-button class="ion-marging-top" expand="block" routerLink="/home/parametres/gestion-parc/new-materiel"><ion-icon slot="start" name="add-outline"></ion-icon>{{'ADHERENTS.ajouter' | translate }}</ion-button>
       <ion-button class="ion-marging-top" expand="block" (click)="export()">
-        <ion-icon slot="start" name="download-outline"></ion-icon>Exporter
+        <ion-icon slot="start" name="download-outline"></ion-icon>{{'ADHERENTS.export' | translate }}
       </ion-button>
       <ion-input type="file" #fileImportInput name="fileUpload" (change)="fileChangeListener($event)" accept=".csv"></ion-input>
       <ion-card>
         <ion-card-header>
-          <ion-card-title><strong>Matériels :</strong></ion-card-title>
+          <ion-card-title><strong>{{'ADHERENTS.materiels' | translate }} :</strong></ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-list *ngIf="ready">

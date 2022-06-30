@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { EmpruntPageRoutingModule } from './emprunt-routing.module';
 
 import { EmpruntPage } from './emprunt.page';
+import {TranslateModule} from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EmpruntPageRoutingModule
+    EmpruntPageRoutingModule,
+    TranslateModule
   ],
   declarations: [EmpruntPage]
 })
