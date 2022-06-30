@@ -41,6 +41,15 @@ export class AdherentsService {
       .pipe(map((response) => response.status === 201))
   }
 
+  public modifierUser(id: number, nom: string, uuid: string, password : string): Observable<boolean>{
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const headers = {'Content-Type': 'application/merge-patch+json'};
+    return this.http.patch(this.server+'/'+id,
+    {nom , uuid, password},
+    {headers,observe: 'response', responseType: 'json'})
+    .pipe(map((response)=>response.status===200));
+  }
+
   public deleteUserFromId(id: number): Observable<boolean> {
     return this.http.delete(this.server + "/" + id.toString(),
       { observe: 'response', responseType: 'json' })

@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'nouvel-adherent',
     loadChildren: () => import('./nouvel-adherent/nouvel-adherent.module').then( m => m.NouvelAdherentPageModule)
+  },
+  {
+    path: ':modifier-adherent',
+    loadChildren: () => import('./modifier-adherent/modifier-adherent.module').then( m => m.ModifierAdherentPageModule)
   }
 ];
 

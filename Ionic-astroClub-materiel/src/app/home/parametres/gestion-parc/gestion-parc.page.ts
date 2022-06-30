@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActionSheetController, IonItemSliding, LoadingController } from '@ionic/angular';
 import { ngxCsv } from 'ngx-csv';
+import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
 import { Inventaire } from 'src/entity/Inventaire';
 import { InventaireExport } from 'src/entity/InventaireExport';
+import { InventairePost } from 'src/entity/InventairePost';
 import { TypeMateriel } from 'src/entity/TypeMateriel';
 import { InventairesService } from 'src/services/inventaires.service';
 import { TypeMaterielService } from 'src/services/type-materiel.service';
@@ -24,7 +26,8 @@ export class GestionParcPage implements OnInit {
   constructor(private inventaireService: InventairesService,
     private actionSheetCtrl: ActionSheetController,
     private loadingCrtl : LoadingController,
-    private typeMatService : TypeMaterielService
+    private typeMatService : TypeMaterielService,
+    private ngxCsvParser: NgxCsvParser
     ) {
     this.ready= false;
   }
@@ -32,6 +35,7 @@ export class GestionParcPage implements OnInit {
   ngOnInit() {
   }
 
+  inventairesExport : Array<InventaireExport> = new Array();
   export() : void
   {
     if(this.ready)
@@ -45,25 +49,25 @@ export class GestionParcPage implements OnInit {
         title: '',
         useBom: true,
         noDownload: false,
-        headers: []
+        headers: ["typeMateriel","intitule","description","kit","conditionnement","etat","emprunt","montantCaution","commentaire","enMaintenance",]
       };
-      // let s = this.inventaires.map(mat =>
-
-      //     new InventaireExport(mat.typeMateriel.nom, mat.intitule, mat.description, mat.kit, mat.conditionnement, mat.etat,
-      //       mat.emprunt, mat.montantCaution, mat.commentaire, mat.enMaintenance)
-      //   );
-      console.log(this.inventaires)
-      let newLists = this.inventaires.map(mat =>
+      this.loadingCrtl.create({keyboardClose : true, message : 'Veuillez patienter...'}).then(loadingEl =>
         {
-          const id = Number(String(mat.typeMateriel).split("/")[3])
-          this.typeMatService.getOneTypeMat(id).subscribe(typeMat => this.typeMateriel = typeMat)
-          console.log(this.typeMateriel)
-          return new InventaireExport(this.typeMateriel?.nom, mat.intitule, mat.description, mat.kit, mat.conditionnement, mat.etat,
-          mat.emprunt, mat.montantCaution, mat.commentaire, mat.enMaintenance)
-        }
-      )
-      let b = new ngxCsv( newLists, "Liste des matériaux", options);
-      //console.log(b.getCsv().replace('"',''))
+          loadingEl.present()
+          this.inventaires.map(mat =>
+            {
+              this.typeMatService.getOneTypeMat(Number(String(mat.typeMateriel).split("/")[3])).subscribe(typeMat =>
+              {
+                this.typeMateriel = typeMat
+                console.log(this.typeMateriel)
+                this.inventairesExport.push(new InventaireExport(this.typeMateriel?.nom, mat.intitule, mat.description, mat.kit, mat.conditionnement, mat.etat,
+                mat.emprunt, mat.montantCaution, mat.commentaire, mat.enMaintenance))
+                new ngxCsv(this.inventairesExport, "ListeMateriaux", options)
+                loadingEl.dismiss()
+              })
+            })
+
+        })
     }
     else
     {
@@ -75,7 +79,71 @@ export class GestionParcPage implements OnInit {
 
   fileChangeListener($event) : void
   {
-    console.log("Import du matériels")
+    const files = $event.srcElement.files;
+    this.ngxCsvParser.parse(files[0], { header: true, delimiter: ',' })
+      .pipe().subscribe(
+        {
+          next : (result) : void =>
+          {
+            let idTypeMat = 0;
+            for(let inv of result as InventaireExport[])
+            {
+              const invPost:  InventairePost =
+              {
+                intitule: "",
+                description: "",
+                kit: "",
+                conditionnement: "",
+                etat: "",
+                emprunt: "",
+                montantCaution: 0,
+                commentaire: "",
+                enMaintenance: false,
+                typeMateriel: "",
+              }
+              invPost.intitule = inv.intitule
+              invPost.description = inv.description
+              invPost.kit = inv.kit
+              invPost.conditionnement = inv.kit
+              invPost.etat = inv.etat
+              invPost.emprunt = inv.emprunt
+              invPost.montantCaution = Number(inv.montantCaution)
+              invPost.commentaire = inv.commentaire
+
+              if ( String (inv.enMaintenance) === 'FALSE') {
+                invPost.enMaintenance = false;
+              }
+              if ( String (inv.enMaintenance) === 'TRUE'){
+                invPost.enMaintenance = true;
+              }
+
+                this.loadingCrtl.create({ keyboardClose: true, message: 'Importation en cours...' }).then(loadingEl =>{
+                  loadingEl.present()
+                  this.typeMatService.getAllTypeMat().subscribe(typeMatTab =>
+                    {
+                      typeMatTab.forEach(typeMat =>
+                        {
+                          if(typeMat.nom === inv.typeMateriel)
+                          {
+                            invPost.typeMateriel = '/api/type_materiels/'+typeMat.id.toString()
+                            this.inventaireService.createInventaire(invPost).subscribe(() =>
+                            {
+                              console.log("Création Matériaux terminée")
+
+                            })
+                          }
+                        })
+                        loadingEl.dismiss();
+                    })
+                })
+          }
+        },
+              error: (error: NgxCSVParserError): void => {
+                console.log('Error', error);
+              }
+  })
+
+
   }
   ionViewWillEnter(){
     this.inventaireService.getAllInventaires().subscribe(response => {
